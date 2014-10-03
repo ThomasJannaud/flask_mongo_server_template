@@ -1,0 +1,2 @@
+Modify the .proto if you want (the data model) and then run generate_protos.sh to produce the other
+files. Don't modify those generated files.
