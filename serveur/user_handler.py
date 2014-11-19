@@ -1,5 +1,7 @@
 from flask import session
 from flask.ext import login as flogin
+from flask.ext.login import LoginManager
+from serveur import app
 from serveur.db import data_models
 
 
@@ -19,7 +21,10 @@ class FLUser:
     def get_id(self):
         return self.user_pb.id
 
-
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+@login_manager.user_loader
 def load_user(userid):
     """Used by Flask to make a FLUser from our user id, for auto login sessions from cookie etc."""
     table = data_models.GetTable(data_models.RW_USERS)
@@ -28,6 +33,7 @@ def load_user(userid):
     return FLUser(user_pb)
 
 
+@app.route('/register')
 def register():
     """Creates the user in the database. For users, don't use mongodb's id, e create our own (email, ...).
     TODO: Should of course use the request params, not harcoded values."""
@@ -38,6 +44,7 @@ def register():
     return 'ok, registered'
 
 
+@app.route('/login')
 def login():
     """ login as our user.
     TODO: in practice, check request login/password."""
@@ -45,27 +52,30 @@ def login():
     user_pb = data_models.ToProto(table.find_one({"_id": "1234"}), data_models.RW_USERS)
     user = FLUser(user_pb)
     flogin.login_user(user, remember=True)
-    session['toto'] = 0  # this is for playing in /test_user only
     return 'log in success'
 
 
+@app.route('/logout')
 def logout():
     flogin.logout_user()
     return 'logged out'
 
 
+@app.route('/test_user')
 def test():
     """This is for playing with session/login/logout. Sessions exist for anonymous users. Ex: buying goods in an ecommerce
     -> you need session to know what is in the shopping cart.
     TODO: in practice, check request login/password."""
-    if 'toto' not in session:
-        us = data_models.all_pbs.User()
-        us.prenom = 'skfjldkjf'
-        session['toto'] = data_models.protobuf_json.pb2json(us)
+    KEY_USER_IN_CREATION = 'user_in_creation'
+    if KEY_USER_IN_CREATION not in session:
+        user_in_creation = data_models.all_pbs.User()
+        user_in_creation.prenom = 'session prenom'
+        session[KEY_USER_IN_CREATION] = data_models.protobuf_json.pb2json(user_in_creation)
     if flogin.current_user.is_anonymous():
-        us = data_models.protobuf_json.json2pb(data_models.all_pbs.User(), session['toto'])
-        return 'anonyme' + us.prenom
+        user_in_creation = data_models.protobuf_json.json2pb(data_models.all_pbs.User(), session[KEY_USER_IN_CREATION])
+        return 'anonyme ; current user in creation :' + user_in_creation.prenom
     else:
-        us = data_models.protobuf_json.json2pb(data_models.all_pbs.User(), session['toto'])
-        return 'salut' + flogin.current_user.user_pb.prenom + us.prenom
+        user_in_creation = data_models.protobuf_json.json2pb(data_models.all_pbs.User(), session[KEY_USER_IN_CREATION])
+        return 'logged in / not anononymous ; user:%s, current user in creation:%s' % (
+            flogin.current_user.user_pb.prenom, user_in_creation.prenom)
 

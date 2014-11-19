@@ -1,21 +1,26 @@
 from flask import render_template
 from flask import request
+from serveur import app
 import json
 
 
-class DebugHandler:
-    def __init__(self):
-    	self.urls = {}
-
-    def Special(self, args):
-        return json.dumps(self.urls.get("/debug/%s" % args, '"error"'))
+@app.before_request
+def log_request():
+    app.logger.debug(request.url)
 
 
-    def Get(self):
-        return render_template('debug.html', text=json.dumps(self.urls))
+@app.route('/debug/<regex(".*"):args>', methods=['GET'])
+def Special(args):
+    return json.dumps(self.urls.get("/debug/%s" % args, '"error"'))
 
 
-    def Post(self):
-        inp = request.form['urls']
-        self.urls = json.loads(inp)
-        return self.Get()
+@app.route('/debug', methods=['GET'])
+def Get():
+    return render_template('debug.html', text=json.dumps(self.urls))
+
+
+@app.route('/debug', methods=['POST'])
+def Post():
+    inp = request.form['urls']
+    self.urls = json.loads(inp)
+    return self.Get()

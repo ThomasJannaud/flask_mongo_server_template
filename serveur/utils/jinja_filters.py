@@ -14,3 +14,7 @@ def time_period(time_delta):
   else:
     return "%.1f jours" % (time_delta.total_seconds() / (3600 * 24))
 
+
+def setupFilters(app):
+	# Executed before server is running
+	app.jinja_env.filters['time_period'] = time_period
