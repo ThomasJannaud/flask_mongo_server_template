@@ -5,10 +5,6 @@ Main of the server. Run with
     python main.py [--debug]
 """
 
-from datetime import datetime
-from datetime import timedelta
-from flask import Flask
-from flask import request
 from logging import Formatter
 from logging.handlers import RotatingFileHandler
 from serveur import app
