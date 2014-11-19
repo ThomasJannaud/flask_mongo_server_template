@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<p style="color: red;">Ne pas mettre d'url avec d'autres slashs dedans comme "/debug/aa/bb/cc", mettre juste des "/debug/aaaa".</p>
+<p>On peut mettre ce qu'on veut dans les paramètres tant que c'est correct en JSON : tableaux, dictionnaires, tableaux de dictionnaires, ...</p>
+<ul>
+<li>{"/debug/a": ["kjkj", "kjkj"], "/debug/b": ..., }</li>
+<li>{"/debug/a": {"a": [1, 3, 4], "b": {"c": "d", "e": "f"}}, "/debug/b": ..., }</li>
+
+<form action="/debug" method="post">
+    <textarea rows="10" cols="50" name="urls">
+{
+    "/debug/blabla": "blibli",
+    "/debug/blooo": {"a": "jlkjlkj"}
+}</textarea>
+	<input type="submit">
+</form>
+
+<h1>Valeurs des urls</h1>
+<p>{{text}}</p>
+</html>

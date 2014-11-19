@@ -1,98 +1,100 @@
 #!/usr/bin/python
 
-"""Main of the server. run with "python main.py [--debug]" depending if you are debugging locally or if it is the prod server."""
+"""
+Main of the server. Run with
+    python main.py [--debug]
+"""
 
-import data_models
-import jinja_filters
-import listener_handler
-
-from flask import Flask, request
-from flask.ext import login
+from datetime import datetime
+from datetime import timedelta
+from flask import Flask
+from flask import request
 from flask.ext.login import LoginManager
- 
+from serveur import debug_handler
+from serveur import listener_handler
+from serveur import user_handler
+from serveur.utils import session_mongo
+from serveur.utils import jinja_filters
+from werkzeug.routing import BaseConverter
+import sys
 
-class FLUser:
-  def __init__(self, user_pb):
-    self.user_pb = user_pb
-  def is_authenticated(self):
-    return True
-  def is_active(self):
-    return True
-  def is_anonymous(self):
-      return False
-  def get_id(self):
-    return self.user_pb.id
+
+
+class RegexConverter(BaseConverter):
+    """Used to define regexes in app routing."""
+    def __init__(self, url_map, *items):
+        super(RegexConverter, self).__init__(url_map)
+        self.regex = items[0]
 
 
 if __name__ == '__main__':
-  app = Flask(__name__)
-  app.jinja_env.filters['time_period'] = jinja_filters.time_period
+    app = Flask(__name__)
+    app.jinja_env.filters['time_period'] = jinja_filters.time_period
+    app.url_map.converters['regex'] = RegexConverter
 
-  login_manager = LoginManager()
-  login_manager.init_app(app)
-  login_manager.login_view = 'login'
+    @app.before_request
+    def log_request():
+        app.logger.debug(request.url)
+
+    # ------------------------------------------------------------------------------------------
+    # Debug Handler    
+    debug_handl = debug_handler.DebugHandler()
+    @app.route('/debug/<regex(".*"):al>', methods=['GET'])
+    def debug_special(al):
+        return debug_handl.Special(al)
+
+    @app.route('/debug', methods=['GET'])
+    def debug_get():
+        return debug_handl.Get()
+
+    @app.route('/debug', methods=['POST'])
+    def debug_post():
+        return debug_handl.Post()
+
+    # ------------------------------------------------------------------------------------------
+    # User Handler
+    login_manager = LoginManager()
+    login_manager.init_app(app)
+    login_manager.login_view = 'login'
+
+    @login_manager.user_loader
+    def load_user(userid):
+        return user_handler.load_user(userid)
+
+    @app.route('/register')
+    def register():
+        return user_handler.register()
+
+    @app.route('/login')
+    def logme():
+        return user_handler.login()
+
+    @app.route('/logout')
+    def logout():
+        return user_handler.logout()
+
+    @app.route('/test_user')
+    def testpage():
+        return user_handler.test()
+
+    # ------------------------------------------------------------------------------------------
+    # Misc
+    listener_handl = listener_handler.ListenerHandler()
+    @app.route('/listener', methods=['POST'])
+    def listener():
+        return listener_handl.Post()
 
 
-  @app.before_request
-  def log_request():
-    app.logger.debug(request.url)
-
-
-  listener_handl = listener_handler.ListenerHandler()
-  @app.route('/listener', methods=['POST'])
-  def listener():
-    return listener_handl.Post()
-
-
-  @app.route('/test')
-  def testpage():
-    if login.current_user.is_anonymous():
-      return 'anonyme'
+    app.secret_key = "dsfdsf"
+    is_debug = (len(sys.argv) == 2 and sys.argv[1] == '--debug')
+    if is_debug:
+        app.debug = True
+        app.session_interface = session_mongo.MongoSessionInterface()
+        app.run()
     else:
-      return 'salut' + login.current_user.user_pb.prenom
-
-
-  @app.route('/testlog')
-  @login.login_required
-  def testlog():
-    return 'une page'
-
-  @login_manager.user_loader
-  def load_user(userid):
-    table = data_models.GetTable(data_models.RW_USERS)
-    user_pb = data_models.ToProto(table.find_one({"_id": userid}), data_models.RW_USERS)
-    if not user_pb: return None
-    return FLUser(user_pb)
-
-  @app.route('/raz')
-  def raz():
-    data_models.GetTable(data_models.RW_USERS).drop()
-    return 'razed'
-
-
-  @app.route('/register')
-  def register():
-    user_pb = data_models.all_pbs.User()
-    user_pb.id = '1234'
-    user_pb.prenom = 'thomas'
-    data_models.SaveProto(user_pb, data_models.RW_USERS)
-    return 'ok, registered'
-
-
-  @app.route('/login')
-  def logme():
-    table = data_models.GetTable(data_models.RW_USERS)
-    user_pb = data_models.ToProto(table.find_one({"_id": "1234"}), data_models.RW_USERS)
-    user = FLUser(user_pb)
-    login.login_user(user, remember=True)
-    return 'log in success'
-
-
-  @app.route('/logout',methods=['GET'])
-  def logout():
-    login.logout_user()
-    return 'logged out'
-
-  app.debug = True
-  app.secret_key = "sdflkdsmflk"
-  app.run()
+        from tornado.wsgi import WSGIContainer
+        from tornado.httpserver import HTTPServer
+        from tornado.ioloop import IOLoop
+        http_server = HTTPServer(WSGIContainer(app))
+        http_server.listen(8001)
+        IOLoop.instance().start()

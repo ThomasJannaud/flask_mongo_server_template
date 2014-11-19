@@ -1,0 +1,10 @@
+message ObjA {
+    optional string nom = 1;
+    optional int32 prenom = 2;
+}
+
+
+message User {
+    optional string id = 1;
+    optional string prenom = 2;
+}
