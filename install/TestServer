@@ -4,7 +4,7 @@
 # PATH should only include /usr/* if it runs after the mountnfs.sh script
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 NAME="TestServer"
-DAEMON="/home/test/main.py"
+DAEMON="/home/test/run_server.py"
 PIDFILE=/var/run/$NAME.pid
 
 . /lib/lsb/init-functions

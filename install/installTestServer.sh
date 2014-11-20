@@ -7,7 +7,7 @@ TARGET_DIR=/home/test
 
 service $SERVICE_NAME stop
 sleep 2
-pkill main.py
+pkill run_server.py
 rm -f /var/run/${SERVICE_NAME}.pid
 sleep 2
 [ -f /etc/init.d/${SERVICE_NAME} ] && update-rc.d -f ${SERVICE_NAME} remove
