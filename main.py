@@ -20,8 +20,8 @@ if __name__ == '__main__':
     app.url_map.converters['regex'] = utils.RegexConverter
     app.secret_key = "dsfdsf"
     is_debug = (len(sys.argv) == 2 and sys.argv[1] == '--debug')
-    handler = RotatingFileHandler('/tmp/app.log' if is_debug else '/var/log/test_server.log',
-                                  maxBytes=10000000, backupCount=10)
+    app.debug = is_debug
+    handler = RotatingFileHandler('/tmp/app.log' if is_debug else '/var/log/test_server.log', maxBytes=10000000, backupCount=10)
     # log level of the file logger
     handler.setLevel(logging.DEBUG)
     handler.setFormatter(Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))
@@ -34,7 +34,6 @@ if __name__ == '__main__':
     from serveur import listener_handler
     # Run !
     if is_debug:
-        app.debug = True
         # sessions are stored in the db instead of internal variables -> easier for debugging.
         app.session_interface = session_mongo.MongoSessionInterface()
         app.run()

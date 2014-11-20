@@ -21,6 +21,7 @@ class FLUser:
     def get_id(self):
         return self.user_pb.id
 
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
@@ -33,9 +34,9 @@ def load_user(userid):
     return FLUser(user_pb)
 
 
-@app.route('/register')
+@app.route('/api/v1/register')
 def register():
-    """Creates the user in the database. For users, don't use mongodb's id, e create our own (email, ...).
+    """Creates the user in the database. For users, don't use mongodb's id, you must create our own (email, ...).
     TODO: Should of course use the request params, not harcoded values."""
     user_pb = data_models.all_pbs.User()
     user_pb.id = '1234'
@@ -44,7 +45,7 @@ def register():
     return 'ok, registered'
 
 
-@app.route('/login')
+@app.route('/api/v1/login')
 def login():
     """ login as our user.
     TODO: in practice, check request login/password."""
@@ -55,7 +56,7 @@ def login():
     return 'log in success'
 
 
-@app.route('/logout')
+@app.route('/api/v1/logout')
 def logout():
     flogin.logout_user()
     return 'logged out'

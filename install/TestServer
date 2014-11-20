@@ -1,0 +1,31 @@
+#! /bin/sh
+# Wraps the server into a service
+
+# PATH should only include /usr/* if it runs after the mountnfs.sh script
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+NAME="TestServer"
+DAEMON="/home/test/main.py"
+PIDFILE=/var/run/$NAME.pid
+
+. /lib/lsb/init-functions
+
+
+case "$1" in
+  start)
+    log_daemon_msg "Starting $NAME"
+    start-stop-daemon --start --background --make-pidfile --pidfile $PIDFILE --startas $DAEMON
+    log_end_msg $?
+  ;;
+  stop)
+    log_daemon_msg "Stopping $NAME"
+    start-stop-daemon --stop --retry=TERM/30/KILL/5 --pidfile $PIDFILE
+    log_end_msg $?
+  ;;
+  status)
+    status_of_proc -p $PIDFILE "$DAEMON" "$NAME"
+  ;;
+  *)
+    echo "Usage: $0 {start|stop|status}" >&2
+    exit 3
+  ;;
+esac

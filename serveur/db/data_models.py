@@ -31,7 +31,7 @@ _COLLECTION_TO_PB_CLASS = {
 }
 
 client = pymongo.MongoClient()
-mongo_db = client.thomas
+mongo_db = client.test_db
 
 
 def GetTable(collection):
