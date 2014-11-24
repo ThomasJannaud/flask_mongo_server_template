@@ -30,6 +30,7 @@ def Get():
 
 @app.route('/api/debug', methods=['POST'])
 def Post():
+    global urls
     inp = request.form['urls']
     urls = json.loads(inp)
     return 'ok'
