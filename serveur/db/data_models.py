@@ -18,7 +18,6 @@ import test_pb2 as all_pbs
 # RO collections are results of RW collections. If a RO collection is deleted we can recover it
 # very easily. RW collections are the real stuff, if they are deleted we are screwed.
 
-# Just one per station, to be updated with lattest info. mongo _id= station id
 RW_NAMES = 'raw_all'
 RW_USERS = 'raw_users'
 RW_SESSIONS = 'raw_sessions'
