@@ -7,6 +7,7 @@
 
 message User {
     optional int64 id = 1;
+    optional bool admin = 2;
     message Info {
         optional string email = 1;
         optional string password = 2;
@@ -14,16 +15,19 @@ message User {
         optional string last_name = 4;
         optional string phone_number = 5;
     }
-    optional Info info = 2;
-    optional string verification_code = 3;
-    optional bool has_verified_email = 4;
-    optional bool admin = 5;
+    optional Info info = 3;
+    optional string verification_code = 4;
+    optional bool has_verified_email = 5;
+    optional string stripe_customer_id = 6;
+    optional int64 timestamp_creation_secs = 7;
+    optional uint64 timestamp_last_modification_secs = 8;
 }
 
 
-message ObjA {
+message Product {
     optional string name = 1;
     optional int32 quantity = 2;
+    optional int64 user_owner_id = 3;
 }
 
 

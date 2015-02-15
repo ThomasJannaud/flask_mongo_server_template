@@ -3,8 +3,8 @@
 
 # PATH should only include /usr/* if it runs after the mountnfs.sh script
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
-NAME="OpinionazerServer"
-DAEMON="/home/tsapp/serveur/run_server.py"
+NAME="REPLACEME_NAMEServer"
+DAEMON="/home/REPLACEME_TOP_DIRECTORY/serveur/run_server.py"
 PIDFILE=/var/run/$NAME.pid
 
 . /lib/lsb/init-functions

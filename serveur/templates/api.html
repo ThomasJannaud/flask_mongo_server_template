@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf8" />
+    <title>Opinionazer - API</title>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500,300italic,400italic' rel='stylesheet' type='text/css'>
+    <script language="JavaScript" type="text/javascript" src="/static/js/jquery.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/static/bootstrap/dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap/dist/css/bootstrap-theme.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/theme.css">
+  </head>
+  <body>
+    <div class="container-fluid">
+      {% for api in apis %}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{api[0]}}</h3>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped">
+            <tbody>
+              {% for method in api[1] %}
+              <tr>
+                <td>{{method.url}}</td>
+                <td>{{method.methods | join(', ') }}</td>
+                <td><pre>{{method.description}}</pre></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>

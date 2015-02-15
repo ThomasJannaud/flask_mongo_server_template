@@ -50,7 +50,7 @@ if __name__ == '__main__':
     from serveur.utils import utils
     jinja_filters.setupFilters(app)
     app.url_map.converters['regex'] = utils.RegexConverter
-    handler = RotatingFileHandler('/tmp/app.log' if is_debug else '/var/log/opinionazer.log', maxBytes=10000000, backupCount=10)
+    handler = RotatingFileHandler('/tmp/app.log' if is_debug else '/var/log/%s.log' % Constants.APP_NAME.lower(), maxBytes=10000000, backupCount=10)
     # log level of the file logger
     handler.setLevel(logging.DEBUG)
     handler.setFormatter(Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'))

@@ -30,7 +30,7 @@ RW_UNIQUE_IDS = 'unique_ids'
 # Implements collection -> protobuf type uniqueness.
 _COLLECTION_TO_PB_CLASS = {
     RW_SESSIONS: None,
-    RW_PRODUCTS: all_pbs.ObjA,
+    RW_PRODUCTS: all_pbs.Product,
     RW_USERS: all_pbs.User,
 }
 

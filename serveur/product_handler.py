@@ -17,7 +17,7 @@ def page_products():
 def get_all_product():
     """Gets all products in the db.
 
-    output: [ObjA] as json.
+    output: [Product] as json.
     """
     table = data_models.GetTable(data_models.RW_PRODUCTS)
     product_pbs = data_models.ToProto(table.find())
@@ -26,8 +26,8 @@ def get_all_product():
 
 @app.route('/api/v1/product/save', methods=['POST'])
 def save_product():
-	"""Takes an object of type ObjA as json and saves it in the db."""
+	"""Takes an object of type Product as json and saves it in the db."""
 	inp = request.get_json()
-	pb = protobuf_json.json2pb(all_pbs.ObjA(), inp)
+	pb = protobuf_json.json2pb(all_pbs.Product(), inp)
 	data_models.SaveProto(pb, data_models.RW_PRODUCTS)
 	return 'ok'

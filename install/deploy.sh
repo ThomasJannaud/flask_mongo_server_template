@@ -23,5 +23,5 @@ then
 fi
 
 
-scp -P 2339 installTestServer.sh root@${HOST}:/tmp || exit
-ssh -p 2339 root@${HOST} "bash /tmp/installTestServer.sh $1" || exit
+scp -P 2339 installServer.sh root@${HOST}:/tmp || exit
+ssh -p 2339 root@${HOST} "bash /tmp/installServer.sh $1" || exit

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ./installOpinionazerServer.sh [--prod]
+# ./installServer.sh [--prod]
 #
 # For security, deploys beta server by default.
 #
@@ -8,13 +8,13 @@
 
 if [ "$1" == "--prod" ]
 then
-    SERVICE_NAME=OpinionazerServer
+    SERVICE_NAME=REPLACEME_NAMEServer
     server_arg="--prod"
 else
-    SERVICE_NAME=OpinionazerServer_Beta
+    SERVICE_NAME=REPLACEME_NAMEServer_Beta
     server_arg="--beta"
 fi
-TARGET_DIR=/home/my_server_directory
+TARGET_DIR=/home/REPLACEME_TOP_DIRECTORY
 
 service $SERVICE_NAME stop
 sleep 2
