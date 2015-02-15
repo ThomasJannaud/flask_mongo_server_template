@@ -1,0 +1,48 @@
+// -------------------------
+//           BDD
+// -------------------------
+//
+// What the database stores
+
+
+message User {
+    optional int64 id = 1;
+    message Info {
+        optional string email = 1;
+        optional string password = 2;
+        optional string first_name = 3;
+        optional string last_name = 4;
+        optional string phone_number = 5;
+    }
+    optional Info info = 2;
+    optional string verification_code = 3;
+    optional bool has_verified_email = 4;
+    optional bool admin = 5;
+}
+
+
+message ObjA {
+    optional string name = 1;
+    optional int32 quantity = 2;
+}
+
+
+// -------------------------
+//          Website
+// -------------------------
+//
+// Requests on the website
+
+// Login page
+message LoginRequest {
+    optional string email = 1;
+    optional string password = 2;
+    optional bool remember = 3;
+}
+
+
+// Registration page
+message RegistrationRequest {
+    optional User.Info user_info = 1;
+    optional string stripe_token = 2;
+}

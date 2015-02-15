@@ -1,7 +1,10 @@
-import pymongo
+from bson.son import SON
+from serveur import Constants
+from serveur.db import all_pb2 as all_pbs
 import protobuf_json    # protobuf <-> dict, not json
+import pymongo
+import random
 
-import test_pb2 as all_pbs
 
 
 # Collection names in mongo. We decide that a collection will hold only one type of object.
@@ -18,26 +21,38 @@ import test_pb2 as all_pbs
 # RO collections are results of RW collections. If a RO collection is deleted we can recover it
 # very easily. RW collections are the real stuff, if they are deleted we are screwed.
 
-RW_NAMES = 'raw_all'
-RW_USERS = 'raw_users'
-RW_SESSIONS = 'raw_sessions'
+RW_USERS = 'users'
+RW_PRODUCTS = 'products'
+RW_SESSIONS = 'sessions'
+RW_UNIQUE_IDS = 'unique_ids'
+
 
 # Implements collection -> protobuf type uniqueness.
 _COLLECTION_TO_PB_CLASS = {
-        RW_NAMES: all_pbs.ObjA,
-        RW_USERS: all_pbs.User,
-        RW_SESSIONS: None,
+    RW_SESSIONS: None,
+    RW_PRODUCTS: all_pbs.ObjA,
+    RW_USERS: all_pbs.User,
 }
 
 client = pymongo.MongoClient()
-mongo_db = client.test_db
+mongo_db = client[Constants.DB_NAME]
+
+
+def Raz():
+    """Empties the database."""
+    client.drop_database(Constants.DB_NAME)
 
 
 def GetTable(collection):
-    """Returns the Py object that mirrors the MongoDB collection.
-    On it you can call .find(), ... cf pymongo documentation."""
+    """Returns the Python object that mirrors the MongoDB collection.
+    On it you can call .find(), ... Cf pymongo documentation."""
     assert(collection in _COLLECTION_TO_PB_CLASS)
     return mongo_db[collection]
+
+
+def ProtoForTable(table):
+    """Returns a new proto object for the given table."""
+    return _COLLECTION_TO_PB_CLASS[table]()
 
 
 def SaveProto(obj, collection_name):
@@ -49,7 +64,7 @@ def SaveProto(obj, collection_name):
     SaveProto and ToProto are meant to be reciprocal."""
     assert(obj.__class__ == _COLLECTION_TO_PB_CLASS[collection_name])
     kvs = protobuf_json.pb2json(obj)
-    if collection_name == RW_USERS and obj.id:
+    if collection_name in (RW_USERS,) and obj.id:
         kvs['_id'] = obj.id
         del kvs['id']
     mongo_db[collection_name].save(kvs)
@@ -61,11 +76,11 @@ def ToProto(cursor, collection_name=None):
     are of the form {_id:, value:}, so this interfaces    mongo and our protobuf data model.
     This is the reciprocal function of SaveProto plus it enables to read 'read-only' collections
     (SaveProto doesn't handle them)."""
-    # example : ToProto(table.findOne()) -> None.
+    # example : ToProto(table.find_one()) -> None.
     if not cursor: return None
     col_name = cursor.collection.name if collection_name is None else collection_name
     cls = _COLLECTION_TO_PB_CLASS[col_name]
-    if col_name == RW_USERS:
+    if col_name in (RW_USERS, ):
         pb = protobuf_json.json2pb(cls(), cursor)
         pb.id = cursor['_id']
         return pb
@@ -81,3 +96,31 @@ def ToDict(pb):
     """protobuf -> dictionary.
     Wrapper around protobuf_json module so that other modules in our project don't use it."""
     return protobuf_json.pb2json(pb)
+
+
+def DictToProto(pb, json_data):
+    """dictionary -> protobuf."""
+    return protobuf_json.json2pb(pb, json_data)
+
+
+def ArrayToProto(pb_class, json_array):
+    """json array -> list of protobuf."""
+    return [protobuf_json.json2pb(pb_class(), x) for x in json_array]
+
+
+def ToArray(pbs):
+    """[protobuf] -> [dictionary].
+    Wrapper around protobuf_json module so that other modules in our project don't use it."""
+    return [ToDict(pb) for pb in pbs]
+
+
+def GetUniqueId():
+    """Returns unique id uint64."""
+    table = mongo_db[RW_UNIQUE_IDS]
+    while True:
+        # 100 : this is to avoid collisions with fake data ids.
+        _id = 100 + random.getrandbits(30)
+        x = table.find_one({"_id": _id})
+        if x == None:
+            table.insert({"_id": _id})
+            return _id

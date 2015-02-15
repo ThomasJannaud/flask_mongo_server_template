@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf8" />
+    <title>Produits</title>
+    <script language="JavaScript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/static/js/products_ng.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/static/js/utils.js"></script>  
+  </head>
+  <body id="ng-controller">
+    <p ng-repeat="product in products">
+    name: [{[product.name]}]<br/>
+    qte: [{[product.quantity]}]
+    </p>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+[
+    {
+        "id": 1,
+        "info": {
+            "email": "f@f.fr",
+            "password": "f",
+            "first_name": "f prenom",
+            "last_name": "f nom",
+            "phone_number": "123 111"
+        },
+        "has_verified_email": true
+    },
+    {
+        "id": 2,
+        "info": {
+            "email": "t@j.fr",
+            "password": "t",
+            "first_name": "thomas admin",
+            "last_name": "jannaud",
+            "phone_number": "123 456 789"
+        },
+        "has_verified_email": true,
+        "admin": 1
+    }
+]

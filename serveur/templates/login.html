@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf8" />
+    <title>Opinionazer</title>
+    <link rel="shortcut icon" href="/static/wp-content/uploads/2014/09/Favicon-Opinionazer.png" type="image/x-icon" />
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500,300italic,400italic' rel='stylesheet' type='text/css'>
+    <script language="JavaScript" type="text/javascript" src="/static/js/jquery.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/static/bootstrap/dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/bootstrap/dist/css/bootstrap-theme.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/theme.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css">
+    <script language="JavaScript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/static/js/login.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/static/js/utils.js"></script>  
+  </head>
+  <body>
+    <div id="opz-ng-controller">
+      <div class="container-fluid opz-wrapper">
+        <div class="row-fluid">
+          <div class="col-lg-10 col-lg-push-1 opz-body">
+            <div class="container-fluid opz-full-container">
+              <div class="row-fluid">
+                <div class="col-lg-2">
+                  <img src="/static/images/logo.png" style="width:100%">
+                </div>
+                <div class="col-lg-10 opz-menu-header">
+                  <ul class="nav nav-tabs">
+                    <li role="navigation"><a href="" onClick="jumpTo('dashboard')">{{ _('Dashboard') }}</a></li>
+                    <li role="navigation"><a href="" onClick="jumpTo('reporting')">{{ _('Reporting') }}</a></li>
+                    <li role="navigation"><a href="" onClick="jumpTo('checkpoints')">{{ _('Checkpoints') }}</a></li>
+                  </ul>
+                  <ul class="nav nav-tabs opz-align-right opz-right-nav">
+                    <li role="navigation"><a href="" onClick="jumpTo('functions')">{{ _('Settings') }}</a></li>
+                    <li role="navigation"><a href="" onClick="jumpTo('personal-info')">{{ _('Account') }}</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container opz-overlay opz-blk-overlay"></div>
+      <div class="container opz-overlay">
+        <div class="row">
+          <div class="col-lg-6 col-lg-push-3">
+            <div class="panel panel-default opz-option-panel" style="z-index:100;margin-top:140px">
+              <div class="panel-heading no-border"><h3 class="form-control-static">{{ _('Log in') }}</h3></div>
+                <div class="panel-body">
+                  <div class="row" style="margin-bottom:7px">
+                    <div class="col-lg-12">
+                        <input id="opz-email" type='text' class='form-control pad-tb20-lr-15' placeholder="{{ _('Your email address') }}" style="z-index:0;"/>
+                    </div>
+                  </div>
+                  <div class="row" style="margin-bottom:7px">
+                    <div class="col-lg-12">
+                        <input id="opz-password" type='password' class='form-control pad-tb20-lr-15' placeholder="{{ _('Your password') }}" style="z-index:0;"/>
+                    </div>
+                  </div>
+                  <div class="row" style="margin-bottom:7px">
+                    <div class="col-lg-6">
+                      <div class="form-control-static" style="padding-left:0px;backgound:none"><input id="opz-remember" type="checkbox"> {{ _('Keep me signed in on this computer') }}</div>
+                    </div>
+                    <div class="col-lg-6">
+                      <button class="btn btn-link" style="float:right;padding-right:0px" onClick="forgotPassword()">{{ _('I forgot my password') }}</button>
+                    </div>
+                  </div>
+                  <div class="row" style="margin-bottom:7px">
+                    <div class="col-lg-12">
+                      <button class="btn btn-green" style="width:100%;height:4em" onClick="tryLogin()">{{ _('Login') }}</button>
+                    </div>
+                  </div>
+                  <div class="row" style="margin-bottom:7px">
+                    <div class="col-lg-12">
+                      <p class="form-control-static" disabled style="width:100%;text-align:center;"><span class="hr-saperator"></span><span class="text">{{ _('or :') }}</span></p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12">
+                    <p><button class="btn btn-link" style="padding-right:0px" onClick="register()">{{ _('Not yet registered?') }}</button></p>
+                      <button class="btn btn-success" style="width:100%;height:4em" onClick="jumpTo('signup');">{{ _('Sign up') }}</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
