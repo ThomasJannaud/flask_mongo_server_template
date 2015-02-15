@@ -22,14 +22,14 @@ def page_login():
 
 
 @app.route('/logout', methods=['GET'])
-def page_logout(lang):
+def page_logout():
     """logout page."""
     flogin.logout_user()
     return redirect('/login')
 
 
 @app.route('/signup', methods=['GET'])
-def page_signup(lang):
+def page_signup():
     """Sign up page."""
     return render_template('signup.html', stripe_publishable_key=app.config[Constants.STRIPE_PUBLISHABLE_KEY])
 

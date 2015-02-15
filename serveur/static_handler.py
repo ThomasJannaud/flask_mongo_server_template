@@ -10,7 +10,6 @@ def page_not_found(e):
 
 
 @app.route('/', methods=['GET'])
-@app.route('/<regex(".."):lang>/', methods=['GET'])
-def page_home(lang):
+def page_home():
     """Home page any language."""
     return render_template('home.html')

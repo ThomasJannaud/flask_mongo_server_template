@@ -8,9 +8,17 @@
     <script language="JavaScript" type="text/javascript" src="/static/js/utils.js"></script>  
   </head>
   <body id="ng-controller">
+    <h1>All products</h1>
     <p ng-repeat="product in products">
     name: [{[product.name]}]<br/>
-    qte: [{[product.quantity]}]
+    qte: [{[product.quantity]}]<br/>
+    <a href="" ng-click="deleteProduct($index);">delete</a>
     </p>
+    <h1>Register new product</h1>
+    <input type="text" placeholder="name" ng-model="new_product.name"/><br/>
+    <input type="text" placeholder="quantité" ng-model="new_product.quantity"/><br/>
+    <a href="" ng-click="addProduct();">add</a>
+    <h1>Save</h1>
+    <a href="" ng-click="save();">Save</a>
   </body>
 </html>

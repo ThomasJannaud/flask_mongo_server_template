@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='all.proto',
   package='',
-  serialized_pb='\n\tall.proto\"\xd8\x01\n\x04User\x12\n\n\x02id\x18\x01 \x01(\x03\x12\x18\n\x04info\x18\x02 \x01(\x0b\x32\n.User.Info\x12\x19\n\x11verification_code\x18\x03 \x01(\t\x12\x1a\n\x12has_verified_email\x18\x04 \x01(\x08\x12\r\n\x05\x61\x64min\x18\x05 \x01(\x08\x1a\x64\n\x04Info\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x12\n\nfirst_name\x18\x03 \x01(\t\x12\x11\n\tlast_name\x18\x04 \x01(\t\x12\x14\n\x0cphone_number\x18\x05 \x01(\t\"&\n\x04ObjA\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x08quantity\x18\x02 \x01(\x05\"A\n\x0cLoginRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x10\n\x08remember\x18\x03 \x01(\x08\"J\n\x13RegistrationRequest\x12\x1d\n\tuser_info\x18\x01 \x01(\x0b\x32\n.User.Info\x12\x14\n\x0cstripe_token\x18\x02 \x01(\t')
+  serialized_pb='\n\tall.proto\"\xbf\x02\n\x04User\x12\n\n\x02id\x18\x01 \x01(\x03\x12\r\n\x05\x61\x64min\x18\x02 \x01(\x08\x12\x18\n\x04info\x18\x03 \x01(\x0b\x32\n.User.Info\x12\x19\n\x11verification_code\x18\x04 \x01(\t\x12\x1a\n\x12has_verified_email\x18\x05 \x01(\x08\x12\x1a\n\x12stripe_customer_id\x18\x06 \x01(\t\x12\x1f\n\x17timestamp_creation_secs\x18\x07 \x01(\x03\x12(\n timestamp_last_modification_secs\x18\x08 \x01(\x04\x1a\x64\n\x04Info\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x12\n\nfirst_name\x18\x03 \x01(\t\x12\x11\n\tlast_name\x18\x04 \x01(\t\x12\x14\n\x0cphone_number\x18\x05 \x01(\t\"@\n\x07Product\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x08quantity\x18\x02 \x01(\x05\x12\x15\n\ruser_owner_id\x18\x03 \x01(\x03\"A\n\x0cLoginRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x10\n\x08remember\x18\x03 \x01(\x08\"J\n\x13RegistrationRequest\x12\x1d\n\tuser_info\x18\x01 \x01(\x0b\x32\n.User.Info\x12\x14\n\x0cstripe_token\x18\x02 \x01(\t')
 
 
 
@@ -69,8 +69,8 @@ _USER_INFO = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=130,
-  serialized_end=230,
+  serialized_start=233,
+  serialized_end=333,
 )
 
 _USER = _descriptor.Descriptor(
@@ -88,30 +88,51 @@ _USER = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='info', full_name='User.info', index=1,
-      number=2, type=11, cpp_type=10, label=1,
+      name='admin', full_name='User.admin', index=1,
+      number=2, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='info', full_name='User.info', index=2,
+      number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='verification_code', full_name='User.verification_code', index=2,
-      number=3, type=9, cpp_type=9, label=1,
+      name='verification_code', full_name='User.verification_code', index=3,
+      number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='has_verified_email', full_name='User.has_verified_email', index=3,
-      number=4, type=8, cpp_type=7, label=1,
+      name='has_verified_email', full_name='User.has_verified_email', index=4,
+      number=5, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='admin', full_name='User.admin', index=4,
-      number=5, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
+      name='stripe_customer_id', full_name='User.stripe_customer_id', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='timestamp_creation_secs', full_name='User.timestamp_creation_secs', index=6,
+      number=7, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='timestamp_last_modification_secs', full_name='User.timestamp_last_modification_secs', index=7,
+      number=8, type=4, cpp_type=4, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -125,27 +146,34 @@ _USER = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=14,
-  serialized_end=230,
+  serialized_end=333,
 )
 
 
-_OBJA = _descriptor.Descriptor(
-  name='ObjA',
-  full_name='ObjA',
+_PRODUCT = _descriptor.Descriptor(
+  name='Product',
+  full_name='Product',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='name', full_name='ObjA.name', index=0,
+      name='name', full_name='Product.name', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='quantity', full_name='ObjA.quantity', index=1,
+      name='quantity', full_name='Product.quantity', index=1,
       number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='user_owner_id', full_name='Product.user_owner_id', index=2,
+      number=3, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -159,8 +187,8 @@ _OBJA = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=232,
-  serialized_end=270,
+  serialized_start=335,
+  serialized_end=399,
 )
 
 
@@ -201,8 +229,8 @@ _LOGINREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=272,
-  serialized_end=337,
+  serialized_start=401,
+  serialized_end=466,
 )
 
 
@@ -236,15 +264,15 @@ _REGISTRATIONREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=339,
-  serialized_end=413,
+  serialized_start=468,
+  serialized_end=542,
 )
 
 _USER_INFO.containing_type = _USER;
 _USER.fields_by_name['info'].message_type = _USER_INFO
 _REGISTRATIONREQUEST.fields_by_name['user_info'].message_type = _USER_INFO
 DESCRIPTOR.message_types_by_name['User'] = _USER
-DESCRIPTOR.message_types_by_name['ObjA'] = _OBJA
+DESCRIPTOR.message_types_by_name['Product'] = _PRODUCT
 DESCRIPTOR.message_types_by_name['LoginRequest'] = _LOGINREQUEST
 DESCRIPTOR.message_types_by_name['RegistrationRequest'] = _REGISTRATIONREQUEST
 
@@ -260,11 +288,11 @@ class User(_message.Message):
 
   # @@protoc_insertion_point(class_scope:User)
 
-class ObjA(_message.Message):
+class Product(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
-  DESCRIPTOR = _OBJA
+  DESCRIPTOR = _PRODUCT
 
-  # @@protoc_insertion_point(class_scope:ObjA)
+  # @@protoc_insertion_point(class_scope:Product)
 
 class LoginRequest(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType
