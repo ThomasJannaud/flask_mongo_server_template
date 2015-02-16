@@ -40,11 +40,11 @@ if __name__ == '__main__':
         app.config[Constants.ALLOW_ANYONE] = False
         app.config[Constants.UPLOAD_DIR] = "upload_prod"
     if is_prod:
-        stripe.api_key = "sk_live_cKkSEjcGVvVDNfojcJ0Auene"
-        app.config[Constants.STRIPE_PUBLISHABLE_KEY] = "pk_live_LOE6oWwEKRByVYtSqwsopZZS"
+        stripe.api_key = "sk_live_7WMT9Du1YdjhUlioed2RKv0p"
+        app.config[Constants.STRIPE_PUBLISHABLE_KEY] = "pk_live_bbtSKIKZ1EFSnwIOKmlTtm0n"
     else:
-        stripe.api_key = "sk_test_NqgOKo6Bh2rJ6zkKMwawRYYF"        
-        app.config[Constants.STRIPE_PUBLISHABLE_KEY] = "pk_test_dgF9KlVsVxUSEjdQx0AE4IBP"
+        stripe.api_key = "sk_test_xHVPFMzSuXi6okL23oILEAql"        
+        app.config[Constants.STRIPE_PUBLISHABLE_KEY] = "pk_test_ljhglPykU1D7d4mP9TLT14KW"
     from serveur.utils import jinja_filters
     from serveur.utils import session_mongo
     from serveur.utils import utils
