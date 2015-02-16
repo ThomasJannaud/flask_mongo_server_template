@@ -1,0 +1,7 @@
+.close-cross {
+    float: right;
+    margin: 25px 15px 0 0;
+    width:20px;
+    height:20px;
+    cursor: pointer;
+}
