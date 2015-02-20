@@ -36,6 +36,10 @@ ngApp.controller('ngController', ['$scope', '$http', function($scope, $http) {
     }
 
     // ------------- Signup controller ---------------
+    $scope.stripe_error = "";
+    $scope.monthList = [{name: "January", value: 1}, {name: "February", value: 2}, {name: "March", value: 3}, {name: "April", value: 4}, {name: "May", value: 5}, {name: "June", value: 6}, {name: "July", value: 7}, {name: "August", value: 8}, {name: "September", value: 9}, {name: "October", value: 10}, {name: "November", value: 11}, {name: "December", value: 12}];
+    $scope.card_month = $scope.monthList[0];  // to bind later to $scope.card.exp_month
+    $scope.yearList = [2015, 2016, 2017, 2018, 2019, 2020, 2021];
     $scope.signup = {
         user_info: {
             email: "",
@@ -51,19 +55,10 @@ ngApp.controller('ngController', ['$scope', '$http', function($scope, $http) {
         exp_month: 1,
         exp_year: 2015
     }
-    $scope.monthList = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    $scope.yearList = [2015, 2016, 2017, 2018];
 
-
-    $scope.selectMonth = function(index) {
-        $scope.card.exp_month = index + 1;
-        ga('send', 'event', 'select', 'register-card-year', $scope.card.exp_month);
-    };
-
-    $scope.selectYear = function(index) {
-        $scope.card.exp_year = 2015 + index;
-        ga('send', 'event', 'select', 'register-card-year', $scope.card.exp_year);
-    };
+    $scope.$watch("card_month", function () {
+        $scope.card.exp_month = $scope.card_month.value;
+    }, true);
 
     $scope.trySignup = function() {
         // does email already exist ? if not, try create stripe token.
@@ -85,12 +80,13 @@ ngApp.controller('ngController', ['$scope', '$http', function($scope, $http) {
                         // website. If registration successful, redirect to /products.
                         if (response.error) {
                             $scope.isLoading = false;
+                            $scope.stripe_error = response.error.message;
                             $scope.$apply();
                             ga('send', 'event', 'click', 'trySignup', 'error-stripe');
-                            alert(response.error.message);
                         } else {
                             ga('send', 'event', 'click', 'trySignup', 'success-stripe');
                             $scope.signup.stripe_token = response.id;
+                            $scope.stripe_error = "";
                             $http.post("/api/v1/register", $scope.signup)
                                 .success(function(jsonData, status, headers, config) {
                                     $scope.isLoading = false;
@@ -100,7 +96,7 @@ ngApp.controller('ngController', ['$scope', '$http', function($scope, $http) {
                                 .error(function(jsonData, status, headers, config) {
                                     $scope.isLoading = false;
                                     ga('send', 'event', 'click', 'trySignup', 'error-final');
-                                    alert('Error in account creation. Please contact us if you have any problem : info@opinionazer.com');
+                                    alert('Error in account creation. Please contact us if you have any problem');
                                 });
                         }
                     }
