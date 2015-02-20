@@ -18,7 +18,7 @@
     <script src="https://js.stripe.com/v2/"></script>
   </head>
   <body id="ng-controller" ng-controller="ngController">
-      <div class="container-fluid opz-wrapper">
+      <div class="container-fluid">
         <div class="row-fluid">
           <div class="col-xs-1">
             <img src="/static/images/logo.png" style="width: 100%;"/>
@@ -29,10 +29,10 @@
           <div class="col-xs-3">
           </div>
           <div class="col-xs-1">
-            <a href="" ng-click="showLogin();">Log in</a>
+            <!--<a href="" ng-click="showLogin();">Log in</a>-->
           </div>
-          <div class="col-xs-1">
-            <a href="" ng-click="showSignup();">Sign up</a>
+          <div class="col-xs-2">
+            <a href="" ng-click="showSignup();" style="float: right;">Sign up</a>
           </div>
         </div>
         <div class="row">
@@ -55,7 +55,7 @@
             </div>
             <div class="col-xs-6" style="font-size: 18px; padding: 20px;">
                 <h2>Our tool</h2>
-                <p>We aimed at making the <em>simplest tool ever</em>. This is a backup after all, not Google Drive. This is not an army Swiss knife, but a perfect one feature tool.</p>
+                <p>We aimed at making the <em>simplest tool ever</em>. This is a backup after all, not Google Drive. This is not a Swiss army knife, but a perfect one feature tool.</p>
                 <p><a href="" ng-click="showSignup();">Sign up</a> once, then your data will <em>automatically</em> be backed up, once per hour. There is a <em>dashboard</em> where you can find download any backed up file. That's all.</p>
               <img src="/static/images/dashboard-en.png" style="width: 100%;" />
             </div>
@@ -79,23 +79,23 @@
         </div>
         <!-- footer -->
         <div class="row" style="margin-top: 400px;">
-          <div class="col-xs-5">
-            Contact us for more information : info@backup-google-drive.com or +33 6 60 66 45 45
+          <div class="col-xs-6">
+            Questions? Contact us: info@backup-google-drive.com or +33 6 60 66 45 45
           </div>
-          <div class="col-xs-2">
+          <div class="col-xs-1">
           </div>
           <div class="col-xs-5">
-            Google Drive Backup is a brand of BleezWorld, based in France.<br/>sBusiness identification number at the court of Paris: 803 794 866.<br/>
-            Copyright 2015. All rights reserved. 
+            Google Drive Backup is a brand of BleezWorld, France.<br/>Business identification number: 803 794 866.<br/>
+            Copyright © 2015. All rights reserved. 
           </div>
         </div>
       </div>
-      <div ng-show="isSignup || isLogin" class="container opz-overlay opz-blk-overlay"></div>
-      <div ng-show="isSignup" class="container opz-overlay">
+      <div ng-show="isSignup || isLogin" class="container my-overlay my-blk-overlay"></div>
+      <div ng-show="isSignup" class="container my-overlay">
         <div class="row-fluid" onclick="">
-          <div class="col-lg-2">
+          <div class="col-xs-2">
           </div>
-          <div class="col-lg-8 opz-page-content">
+          <div class="col-xs-8">
             <div class="panel panel-default">
               <div class="panel-header" style="padding-top: 30px;">
                 <img src="/static/images/cross.png" ng-click="closeSignup();" class="close-cross"/>
@@ -104,35 +104,30 @@
                 <ul class="list-group">
                   <li class="list-group-item">
                     <div class="row" style="padding:5px;">
-                      <div class="col-lg-1">
+                      <div class="col-xs-1">
                       </div>
-                      <div class="col-lg-11">
+                      <div class="col-xs-11" ng-form name="form_info">
                         <div class="row" style="margin-bottom:15px;">
-                          <div class="col-lg-12"><span class="singup-step">1</span><h3 class="form-control-static control-label">{{ _('Your personal information') }}</h3></div>
+                          <div class="col-xs-12"><span class="my-signup-step">1</span><h3 class="form-control-static control-label">{{ _('Your account information') }}</h3></div>
                         </div>
+                        <!--
                         <div class="row" style="margin-bottom:15px;">
-                          <div class="col-lg-6">
-                            <input id="opz-fname" type='text' class='form-control' placeholder="First name" ng-model="signup.user_info.first_name" style="z-index:0;"/>
+                          <div class="col-xs-6">
+                            <input type='text' class='form-control' placeholder="First name" ng-model="signup.user_info.first_name" style="z-index:0;"/>
                           </div>
-                          <div class="col-lg-6">
-                            <input id="opz-lname" type='text' class='form-control' placeholder="Last name" ng-model="signup.user_info.last_name" style="z-index:0;"/>
+                          <div class="col-xs-6">
+                            <input type='text' class='form-control' placeholder="Last name" ng-model="signup.user_info.last_name" style="z-index:0;"/>
                             
                           </div>
-                        </div>
+                        </div>-->
                         <div class="row" style="margin-bottom:15px;">
-                          <div class="col-lg-6">
-                            <input id="opz-email" type='text' class='form-control' ng-model="signup.user_info.email" placeholder="Email address" style="z-index:0;"/>
-                            
+                          <div class="col-xs-6">
+                            <input type='email' name="email" class='form-control' ng-model="signup.user_info.email" placeholder="Email address (required)" style="z-index:0;" ng-required/>
+                              <span class="validation_error" ng-show="form_info.email.$error.email">
+                                    Invalid email</span>
                           </div>
-                          <div class="col-lg-6">
-                             <input id="opz-password" type='password' class='form-control' ng-model="signup.user_info.password" placeholder="Password" style="z-index:0;"/>
-                           
-                          </div>
-                        </div>
-                        <div class="row" style="margin-bottom:15px;">
-                          <div class="col-lg-12">
-                             <input id="opz-phone" type='text' class='form-control' ng-model="signup.user_info.phone_number" placeholder="Phone number (Optional)" style="z-index:0;"/>
-                            
+                          <div class="col-xs-6">
+                             <input type='password' class='form-control' ng-model="signup.user_info.password" placeholder="Password" style="z-index:0;"/>
                           </div>
                         </div>
                       </div>
@@ -140,24 +135,33 @@
                   </li>
                   <li class="list-group-item">
                     <div class="row">
-                      <div class="col-lg-1">
+                      <div class="col-xs-1">
                       </div>
-                      <div class="col-lg-11">
+                      <div class="col-xs-11">
                         <div class="row" style="margin-bottom:15px;">
-                          <div class="col-lg-12"><span class="singup-step">2</span><h3 class="form-control-static control-label">{{ _('Your plan') }}</h3></b></div>
+                          <div class="col-xs-12"><span class="my-signup-step">2</span><h3 class="form-control-static control-label">{{ _('Your plan') }}</h3></b></div>
+                        </div>
+                        <div class="row plan-included">
+                          <div class="col-xs-1"><img class="green-check" src="/static/images/check-mark.png"></div>
+                          <div class="col-xs-11">{{ _('Hourly backup of your Google Drive') }}</div>
+                        </div>
+                        <div class="row plan-included">
+                          <div class="col-xs-1"><img class="green-check" src="/static/images/check-mark.png"></div>
+                          <div class="col-xs-11">{{ _('Unlimited disk quota') }}</div>
+                        </div>
+                        <div class="row plan-included">
+                          <div class="col-xs-1"><img class="green-check" src="/static/images/check-mark.png"></div>
+                          <div class="col-xs-11">{{ _('Unlimited, secure access to your backup') }}</div>
+                        </div>
+                        <div class="row" style="margin:15px 30px;">
+                          <div class="col-xs-2"></div>
+                          <div class="col-xs-2 my-signup-circle"><br/>$9.9 /<br/>month</div>
+                          <div class="col-xs-2"></div>
+                          <div class="col-xs-2 my-signup-circle"><br/>1st month<br/>FREE!!</div>
                         </div>
                         <div class="row" style="margin-bottom:15px;">
-                          <div class="col-lg-12"><p class="form-control-static">{{ _('With our plan, we back up your google Drive data every hour, with no limit in disk size. You have unlimited access to your back ups.') }}<p></div>
-                        </div>
-                        <div class="row" style="margin-bottom:30px;">
-                          <div class="col-lg-2"></div>
-                          <div class="col-lg-2 opz-signup-circle"><br/>$9.9 / month</div>
-                          <div class="col-lg-2"></div>
-                          <div class="col-lg-2 opz-signup-circle"><br/>1st month<br/>FREE!!</div>
-                        </div>
-                        <div class="row" style="margin-bottom:15px;">
-                          <div class="col-lg-12">
-                            <p class="form-control-static">{{ _('You can sign off at any time with no fee. You will not be charged anything until the trial period ends.') }}</p>
+                          <div class="col-xs-12">
+                            <p class="form-control-static" style="font-size:16px;">{{ _('You can sign off at any time with no fee.') }}</p>
                           </div>
                         </div>
                       </div>
@@ -165,54 +169,42 @@
                   </li>
                   <li class="list-group-item">
                     <div class="row" style="padding:5px">
-                      <div class="col-lg-1">
+                      <div class="col-xs-1">
                       </div>
-                      <div class="col-lg-11">
+                      <div class="col-xs-11">
                         <div class="row" style="margin-bottom:15px;">
-                          <div class="col-lg-12"><span class="singup-step">3</span><h3 class="form-control-static control-label">{{ _('Your payment information') }}</h3></div>
+                          <div class="col-xs-12"><span class="my-signup-step">3</span><h3 class="form-control-static control-label">{{ _('Your payment information') }}</h3></div>
                         </div>
                         <div class="row" style="margin-bottom:15px;">
-                          <div class="col-lg-8">
-                            <input id="opz-card-number" type='text' class='form-control' ng-model="card.number" placeholder="Card number (Visa, Mastecard or American Express)" style="z-index:0;"/>
+                          <div class="col-xs-8">
+                            <input type='text' class='form-control' ng-model="card.number" placeholder="Card number (Visa, Mastecard or American Express)" style="z-index:0;"/>
                            
                           </div>
-                          <div class="col-lg-4">
-                            <input id="opz-cvc" type='text' class='form-control' ng-model="card.cvc" placeholder="CVC" style="z-index:0;"/>
-                            
+                          <div class="col-xs-3">
+                            <input type='text' class='form-control' ng-model="card.cvc" placeholder="CVV" style="z-index:0;"/>
+                          </div>
+                          <div class="col-xs-1">
+                            <button type="button" class="custom-tooltip" data-container="body" data-toggle="popover" data-placement="top" data-content="<img src='/static/images/cvv.jpg'/>" data-original-title="" title="">?</button>
                           </div>
                         </div>
                         <div class="row" style="margin-bottom:15px;">
-                          <div class="col-lg-6">
-                            <div class="input-group">
-                              <input id="opz-month" type="text" class="form-control white-bg" placeholder="Month" ng-model="monthList[card.exp_month - 1]" disabled />
-                              <div class="input-group-btn">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                                <ul class="dropdown-menu dropdown-menu-right" style="max-height:100px;overflow:auto" role="menu">
-                                  <li ng-repeat="item in monthList"><a href="" ng-click="selectMonth($index)" >[{[item]}]</a></li>
-                                </ul>
-                              </div>
-                            </div>
+                          <div class="col-xs-12">
+                              {{ _('Expiration date:')}}
+                              <select class='form-control normal-width' ng-model="card_month" ng-options="month as month.name for month in monthList"></select>
+                              <select class='form-control normal-width' ng-model="card.exp_year" ng-options="year for year in yearList"></select>
                           </div>
-                          <div class="col-lg-6">
-                            <div class="input-group">
-                              <input id="opz-year" type="text" class="form-control white-bg" ng-model="card.exp_year" placeholder="Year" disabled />
-                              <div class="input-group-btn">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                                <ul class="dropdown-menu dropdown-menu-right" style="max-height:100px;overflow:auto" role="menu">
-                                  <li ng-repeat="item in yearList"><a href="" ng-click="selectYear($index)" >[{[item]}]</a></li>
-                                </ul>
-                              </div>
-                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom:15px;">
+                          <div class="col-xs-12">
+                            <button ng-disabled="isLoading || !signup.user_info.email || !form_info.email.$valid" ng-click="trySignup();" class="btn btn-green" style="width:100%;height:4em">{{ _('Start') }}</button>
+                            <span class="validation_error" ng-show="signup.user_info.email==''">Email required</span><br/>
+                            <span class="validation_error" ng-show="!form_info.email.$valid">Invalid email</span><br/>
+                            <span class="validation_error" ng-bind="stripe_error"></span>
                           </div>
                         </div>
                         <div class="row">
-                          <div class="col-lg-12">
+                          <div class="col-xs-12">
                             <p class="form-control-static">{{ _('Your data is crypted on our servers and we will NEVER share it with third parties.') }}</p>
-                          </div>
-                        </div>
-                        <div class="row" style="margin-bottom:15px;">
-                          <div class="col-lg-12">
-                            <button ng-disabled="isLoading" ng-click="trySignup();" class="btn btn-green" style="width:100%;height:4em">{{ _('Start') }}</button>
                           </div>
                         </div>
                       </div>
@@ -224,45 +216,45 @@
           </div>
         </div>
       </div>
-      <div ng-show="isLogin" class="container opz-overlay">
+      <div ng-show="isLogin" class="container my-overlay">
         <div class="row">
-          <div class="col-lg-6 col-lg-push-3">
-            <div class="panel panel-default opz-option-panel" style="z-index:100;margin-top:140px">
+          <div class="col-xs-6 col-xs-push-3">
+            <div class="panel panel-default" style="z-index:100;margin-top:140px">
               <div class="panel-heading no-border">
                 <img src="/static/images/cross.png" ng-click="closeLogin();" class="close-cross"/>
                 <h3 class="form-control-static">{{ _('Log in') }}</h3>
               </div>
                 <div class="panel-body">
                   <div class="row" style="margin-bottom:7px">
-                    <div class="col-lg-12">
-                        <input id="opz-email" type='text' class='form-control pad-tb20-lr-15' placeholder="{{ _('Your email address') }}" style="z-index:0;"/>
+                    <div class="col-xs-12">
+                        <input type='text' class='form-control pad-tb20-lr-15' placeholder="{{ _('Your email address') }}" style="z-index:0;"/>
                     </div>
                   </div>
                   <div class="row" style="margin-bottom:7px">
-                    <div class="col-lg-12">
-                        <input id="opz-password" type='password' class='form-control pad-tb20-lr-15' placeholder="{{ _('Your password') }}" style="z-index:0;"/>
+                    <div class="col-xs-12">
+                        <input type='password' class='form-control pad-tb20-lr-15' placeholder="{{ _('Your password') }}" style="z-index:0;"/>
                     </div>
                   </div>
                   <div class="row" style="margin-bottom:7px">
-                    <div class="col-lg-6">
-                      <div class="form-control-static" style="padding-left:0px;backgound:none"><input id="opz-remember" type="checkbox"> {{ _('Keep me signed in on this computer') }}</div>
+                    <div class="col-xs-6">
+                      <div class="form-control-static" style="padding-left:0px;backgound:none"><input type="checkbox"> {{ _('Keep me signed in on this computer') }}</div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-xs-6">
                       <button ng-disabled="isLoading" class="btn btn-link" style="float:right;padding-right:0px" onClick="forgotPassword()">{{ _('I forgot my password') }}</button>
                     </div>
                   </div>
                   <div class="row" style="margin-bottom:7px">
-                    <div class="col-lg-12">
+                    <div class="col-xs-12">
                       <button ng-disabled="isLoading" class="btn btn-green" style="width:100%;height:4em" ng-click="tryLogin()">{{ _('Login') }}</button>
                     </div>
                   </div>
                   <div class="row" style="margin-bottom:7px">
-                    <div class="col-lg-12">
-                      <p class="form-control-static" disabled style="width:100%;text-align:center;"><span class="hr-saperator"></span><span class="text">{{ _('or :') }}</span></p>
+                    <div class="col-xs-12">
+                      <p class="form-control-static" disabled style="width:100%;text-align:center;"><span id="hr-separator"></span><span id="hr-or-separator">{{ _('or :') }}</span></p>
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-xs-12">
                     <p>{{ _('Not yet registered?') }}</p>
                       <button class="btn btn-success" style="width:100%;height:4em" ng-click="showSignup();">{{ _('Sign up') }}</button>
                     </div>
@@ -275,5 +267,16 @@
   </body>
   <script>
     Stripe.setPublishableKey("{{stripe_publishable_key}}");
+    $('[data-toggle="popover"]').popover({html: true});
+    $('body').on('click', function (e) {
+        $('[data-toggle="popover"]').each(function () {
+          //the 'is' for buttons that trigger popups
+          //the 'has' for icons within a button that triggers a popup
+          if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+            $(this).popover('hide');
+          }
+        });
+    });
+    </script>
   </script> 
 </html>
