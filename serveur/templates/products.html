@@ -2,12 +2,12 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf8" />
-    <title>Produits</title>
-    <script language="JavaScript" type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
-    <script language="JavaScript" type="text/javascript" src="/static/js/products_ng.js"></script>
-    <script language="JavaScript" type="text/javascript" src="/static/js/utils.js"></script>  
+    <title>Products</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+    <script src="/static/js/utils.js"></script>  
+    <script src="/static/js/ng_products.js"></script>
   </head>
-  <body id="ng-controller">
+  <body id="ng-controller" ng-controller="ngController">
     <h1>All products</h1>
     <p ng-repeat="product in products">
     name: [{[product.name]}]<br/>
@@ -16,7 +16,7 @@
     </p>
     <h1>Register new product</h1>
     <input type="text" placeholder="name" ng-model="new_product.name"/><br/>
-    <input type="text" placeholder="quantité" ng-model="new_product.quantity"/><br/>
+    <input type="text" placeholder="quantity" ng-model="new_product.quantity"/><br/>
     <a href="" ng-click="addProduct();">add</a>
     <h1>Save</h1>
     <a href="" ng-click="save();">Save</a>

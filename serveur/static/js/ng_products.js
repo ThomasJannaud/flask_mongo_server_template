@@ -5,7 +5,7 @@ ngApp.config(function($interpolateProvider) {
     $interpolateProvider.endSymbol(']}]');
 });
 
-ngApp.controller('ngApp', ['$scope', '$http', function($scope, $http) {
+ngApp.controller('ngController', ['$scope', '$http', function($scope, $http) {
     $scope.products = [];  // list of Product
     $scope.sendingData = false;
     $scope.new_product = {name: "", quantity: 0};

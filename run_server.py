@@ -24,7 +24,7 @@ if __name__ == '__main__':
     is_beta = ('--beta' in sys.argv)
     is_prod = ('--prod' in sys.argv)
     assert((is_debug or is_beta or is_prod) and len(sys.argv) == 2)
-    app.secret_key = "dsfdsf"
+    app.secret_key = Constants.FLASK_SECRET_KEY
     app.debug = is_debug
     if is_debug:
         app.config[Constants.MODE] = Constants.DEBUG

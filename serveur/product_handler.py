@@ -3,7 +3,7 @@ from flask import render_template
 from flask import request
 from serveur import app
 from serveur.db import data_models
-from serveur.db import test_pb2 as all_pbs
+from serveur.db import all_pb2 as all_pbs
 import protobuf_json
 
 

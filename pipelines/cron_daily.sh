@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# Runs the mongoDB mapreduce pipelines and backs up the whole database
+# WARNING : back up only small databases...
+
 LOG_FILE="/var/log/server_name.daily"
 date >> $LOG_FILE
 mongo REPLACEME_DBNAME --eval "pipeline='by_question_sum_days';" /home/tsapp/serveur/pipelines/aggregation.js >> $LOG_FILE

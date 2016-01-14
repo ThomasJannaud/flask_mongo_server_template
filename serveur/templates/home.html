@@ -2,7 +2,7 @@
 <html ng-app="ngApp">
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf8" />
-    <title>Google Drive Backup</title>
+    <title>Homepage</title>
     <link rel="shortcut icon" href="/static/images/favicon.png" type="image/x-icon" />
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,500,300italic,400italic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="/static/bootstrap/dist/css/bootstrap.css">
@@ -24,7 +24,7 @@
             <img src="/static/images/logo.png" style="width: 100%;"/>
           </div>
           <div class="col-xs-5">
-            <h1 style="color: #337ab7;">Google Drive Backup</h1>
+            <h1 style="color: #337ab7;">Homepage</h1>
           </div>
           <div class="col-xs-3">
           </div>
@@ -37,56 +37,19 @@
         </div>
         <div class="row">
           <div class="col-xs-12" style="margin-top: 80px">
-            <h2>Why backup your Google Drive data?</h2>
+            <h2>Blabla</h2>
           </div>
         </div>
         <div class="row">
           <div class="col-xs-9" style="font-size: 18px;">
-            <p>Google Drive is <em>excellent</em> and you should use it everywhere: it removes the need for Microsoft Office and is perfect for having all your files in sync accessible from anywhere.</p>
-            <p>However, and you know it <em>because it already happened to you or someone close to you</em>, files can <em>disappear</em>.</p>
-            <p>Someone could have shared something with you and unshared it, you could have trashed it, or Google can have an interruption of service and you need that file right now!</p>
-          </div>
-          <div class="col-xs-9">
+            <p>Our product is excellent. Buy it!</p>
           </div>
         </div>
-        <div class="row"style="margin-top: 40px">
-          <div style="background-image: url('/static/images/massive_scale.jpg'); background-size: cover; width: 100%; height: 400px">
-            <div class="col-xs-6">
-            </div>
-            <div class="col-xs-6" style="font-size: 18px; padding: 20px;">
-                <h2>Our tool</h2>
-                <p>We aimed at making the <em>simplest tool ever</em>. This is a backup after all, not Google Drive. This is not a Swiss army knife, but a perfect one feature tool.</p>
-                <p><a href="" ng-click="showSignup();">Sign up</a> once, then your data will <em>automatically</em> be backed up, once per hour. There is a <em>dashboard</em> where you can find download any backed up file. That's all.</p>
-              <img src="/static/images/dashboard-en.png" style="width: 100%;" />
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12">
-            <h2>How much does it cost?</h2>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-6" style="padding: 40px 60px auto auto; font-size: 18px;">
-            <p>One price to rule them all... It is $9.90 per month, regardless of how much data your Google Drive has.</p>
-            <p>Check out our <a href="" ng-click="showSignup();">free trial offer</a> : 1st month is free!</p>
-          </div>
-          <div class="col-xs-3">
-            <img ng-click="showSignup();" style="width: 100%; cursor: pointer;" src="/static/images/free_trial.png" />
-          </div>
-          <div class="col-xs-3">
-          </div>
-        </div>
-        <!-- footer -->
         <div class="row" style="margin-top: 400px;">
           <div class="col-xs-6">
-            Questions? Contact us: info@backup-google-drive.com or +33 6 60 66 45 45
+            Questions? Contact us: info@yoursite.com
           </div>
           <div class="col-xs-1">
-          </div>
-          <div class="col-xs-5">
-            Google Drive Backup is a brand of BleezWorld, France.<br/>Business identification number: 803 794 866.<br/>
-            Copyright © 2015. All rights reserved. 
           </div>
         </div>
       </div>
@@ -99,7 +62,7 @@
             <div class="panel panel-default">
               <div class="panel-header" style="padding-top: 30px;">
                 <img src="/static/images/cross.png" ng-click="closeSignup();" class="close-cross"/>
-                <h1 style="text-align:center;margin-bottom:20px;">{{ _('Sign up for Drive Backup') }}</h1>
+                <h1 style="text-align:center;margin-bottom:20px;">{{ _('Sign up for this product') }}</h1>
               </div>
                 <ul class="list-group">
                   <li class="list-group-item">
@@ -110,16 +73,6 @@
                         <div class="row" style="margin-bottom:15px;">
                           <div class="col-xs-12"><span class="my-signup-step">1</span><h3 class="form-control-static control-label">{{ _('Your account information') }}</h3></div>
                         </div>
-                        <!--
-                        <div class="row" style="margin-bottom:15px;">
-                          <div class="col-xs-6">
-                            <input type='text' class='form-control' placeholder="First name" ng-model="signup.user_info.first_name" style="z-index:0;"/>
-                          </div>
-                          <div class="col-xs-6">
-                            <input type='text' class='form-control' placeholder="Last name" ng-model="signup.user_info.last_name" style="z-index:0;"/>
-                            
-                          </div>
-                        </div>-->
                         <div class="row" style="margin-bottom:15px;">
                           <div class="col-xs-6">
                             <input type='email' name="email" class='form-control' ng-model="signup.user_info.email" placeholder="Email address (required)" style="z-index:0;" ng-required/>
@@ -128,40 +81,6 @@
                           </div>
                           <div class="col-xs-6">
                              <input type='password' class='form-control' ng-model="signup.user_info.password" placeholder="Password" style="z-index:0;"/>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item">
-                    <div class="row">
-                      <div class="col-xs-1">
-                      </div>
-                      <div class="col-xs-11">
-                        <div class="row" style="margin-bottom:15px;">
-                          <div class="col-xs-12"><span class="my-signup-step">2</span><h3 class="form-control-static control-label">{{ _('Your plan') }}</h3></b></div>
-                        </div>
-                        <div class="row plan-included">
-                          <div class="col-xs-1"><img class="green-check" src="/static/images/check-mark.png"></div>
-                          <div class="col-xs-11">{{ _('Hourly backup of your Google Drive') }}</div>
-                        </div>
-                        <div class="row plan-included">
-                          <div class="col-xs-1"><img class="green-check" src="/static/images/check-mark.png"></div>
-                          <div class="col-xs-11">{{ _('Unlimited disk quota') }}</div>
-                        </div>
-                        <div class="row plan-included">
-                          <div class="col-xs-1"><img class="green-check" src="/static/images/check-mark.png"></div>
-                          <div class="col-xs-11">{{ _('Unlimited, secure access to your backup') }}</div>
-                        </div>
-                        <div class="row" style="margin:15px 30px;">
-                          <div class="col-xs-2"></div>
-                          <div class="col-xs-2 my-signup-circle"><br/>$9.9 /<br/>month</div>
-                          <div class="col-xs-2"></div>
-                          <div class="col-xs-2 my-signup-circle"><br/>1st month<br/>FREE!!</div>
-                        </div>
-                        <div class="row" style="margin-bottom:15px;">
-                          <div class="col-xs-12">
-                            <p class="form-control-static" style="font-size:16px;">{{ _('You can sign off at any time with no fee.') }}</p>
                           </div>
                         </div>
                       </div>

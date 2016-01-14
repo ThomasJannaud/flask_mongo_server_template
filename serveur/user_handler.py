@@ -18,7 +18,7 @@ import stripe
 @app.route('/login', methods=['GET'])
 def page_login():
     """login page."""
-    return render_template('login.html')
+    return render_template('home.html')
 
 
 @app.route('/logout', methods=['GET'])
