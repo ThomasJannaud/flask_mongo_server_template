@@ -8,3 +8,9 @@ Make sure MongoDB is running, then execute
     python run_server --debug
 
 You can play around on the /install folder to install on a fixed IP server.
+
+Visit
+    /api
+to see the API of the website. It is generated on the fly based on comments from various handlers.
+
+Have fun and don't hesitate to tweak around and send me some pull requests!
