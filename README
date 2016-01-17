@@ -3,14 +3,20 @@ This is a very bare website skeleton built on top of Flask.
 It has support for signup/login, mapreduce, Google's protobufer, localization, etc
 Everything you need for a small website with a clean architecture with all you need but not more.
 
+REQUIREMENTS:
+- Have MondoDB installed and running
+- Have Google's Protobuf library installed
+- run serveur/db/generate_protos.sh to compile the .proto file
+
+
+RUNNING:
 Make sure MongoDB is running, then execute
 
     python run_server --debug
 
 You can play around on the /install folder to install on a fixed IP server.
 
-Visit
-    /api
-to see the API of the website. It is generated on the fly based on comments from various handlers.
+
+Visit /api to see the API of the website. It is generated on the fly based on comments from various handlers.
 
 Have fun and don't hesitate to tweak around and send me some pull requests!
