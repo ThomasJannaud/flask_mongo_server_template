@@ -23,6 +23,6 @@ def time_period(time_delta):
 
 
 def setupFilters(app):
-    # Executed before server is running
+    """Executed before server runs"""
     app.jinja_env.filters['time_period'] = time_period
     app.jinja_env.filters['nl2br'] = nl2br

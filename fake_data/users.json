@@ -4,8 +4,8 @@
         "info": {
             "email": "f@f.fr",
             "password": "f",
-            "first_name": "f prenom",
-            "last_name": "f nom",
+            "first_name": "f first",
+            "last_name": "f last",
             "phone_number": "123 111"
         },
         "has_verified_email": true
@@ -15,8 +15,8 @@
         "info": {
             "email": "t@j.fr",
             "password": "t",
-            "first_name": "thomas admin",
-            "last_name": "jannaud",
+            "first_name": "admin first",
+            "last_name": "admin last",
             "phone_number": "123 456 789"
         },
         "has_verified_email": true,

@@ -5,35 +5,8 @@ ngApp.config(function($interpolateProvider) {
 });
 
 ngApp.controller('ngController', ['$scope', '$http', function($scope, $http) {
-    // These 2 bools control wether the signup/login panels are shown.
-    // At any time, at most one of them is true.
-    $scope.isLogin = false;
-    $scope.isSignup = false;
+    // cannot submit more than 1 request at a time.
     $scope.isLoading = false;
-
-    $scope.closeSignup = function() {
-        $scope.isSignup = false;
-        $scope.isLogin = false;
-        ga('send', 'event', 'click', 'close-signup');
-    }
-
-    $scope.closeLogin = function() {
-        $scope.isSignup = false;
-        $scope.isLogin = false;
-        ga('send', 'event', 'click', 'close-login');
-    }
-
-    $scope.showLogin = function() {
-        $scope.isSignup = false;
-        $scope.isLogin = true;
-        ga('send', 'event', 'click', 'show-login');
-    }
-
-    $scope.showSignup = function() {
-        $scope.isLogin = false;
-        $scope.isSignup = true;
-        ga('send', 'event', 'click', 'show-signup');
-    }
 
     // ------------- Signup controller ---------------
     $scope.stripe_error = "";
@@ -63,15 +36,12 @@ ngApp.controller('ngController', ['$scope', '$http', function($scope, $http) {
     $scope.trySignup = function() {
         // does email already exist ? if not, try create stripe token.
         $scope.isLoading = true;
-        ga('send', 'event', 'click', 'trySignup');
         $http.get("/api/v1/check-new-email?email=" + $scope.signup.user_info.email)
             .error(function(data, status, headers, config) {
                 $scope.isLoading = false;
-                ga('send', 'event', 'click', 'trySignup', 'error-mail');
                 alert('An account already exists for this email.');
             })
             .success(function(data, status, headers, config) {
-                ga('send', 'event', 'click', 'trySignup', 'success-mail');
                 // get stripe single use token.
                 // on success of stripe response : finalize signup, else say we have bad card number.
                 Stripe.card.createToken($scope.card, 
@@ -82,20 +52,16 @@ ngApp.controller('ngController', ['$scope', '$http', function($scope, $http) {
                             $scope.isLoading = false;
                             $scope.stripe_error = response.error.message;
                             $scope.$apply();
-                            ga('send', 'event', 'click', 'trySignup', 'error-stripe');
                         } else {
-                            ga('send', 'event', 'click', 'trySignup', 'success-stripe');
                             $scope.signup.stripe_token = response.id;
                             $scope.stripe_error = "";
                             $http.post("/api/v1/register", $scope.signup)
                                 .success(function(jsonData, status, headers, config) {
                                     $scope.isLoading = false;
-                                    ga('send', 'event', 'click', 'trySignup', 'success-final');
-                                    window.location.href = "/dashboard";
+                                    alert('Sign up successful');
                                 })
                                 .error(function(jsonData, status, headers, config) {
                                     $scope.isLoading = false;
-                                    ga('send', 'event', 'click', 'trySignup', 'error-final');
                                     alert('Error in account creation. Please contact us if you have any problem');
                                 });
                         }
@@ -110,20 +76,32 @@ ngApp.controller('ngController', ['$scope', '$http', function($scope, $http) {
         password: "",
         remember: false        
     };
+    $scope.logged_in_as = "t@a.fr";
+
+    $scope.logout = function() {
+        $http.get("/api/v1/logout")
+            .success(function(jsonData, status, headers, config) {
+                $scope.isLoading = false;
+                $scope.logged_in_as = "";
+            })
+            .error(function(jsonData, status, headers, config) {
+                $scope.isLoading = false;
+                alert('Cant log out.');
+            });
+    }
 
     $scope.tryLogin = function() {
         $scope.isLoading = true;
         $http.post("/api/v1/login", $scope.login)
             .success(function(jsonData, status, headers, config) {
                 $scope.isLoading = false;
-                window.location.href = "/dashboard";
+                $scope.logged_in_as = $scope.login.email;
             })
             .error(function(jsonData, status, headers, config) {
                 $scope.isLoading = false;
-                alert('Cant connect. Sign up, use the forget your password functionality or contact us if you have any problem.');
+                alert('Cant login. Sign up, use the forget your password functionality or contact us if you have any problem.');
             });
     }
-
 
     $scope.forgotPassword = function() {
         if (!$scope.login.email) {

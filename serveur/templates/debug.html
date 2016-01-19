@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 
-<p style="color: red;">Toutes les urls doivent commencer par "/debug/". Ex: "/debug/aa", "/debug/aa/bb/cc".</p>
-<p style="color: green;">Les urls seront accessibles à /api/debug/xxx.</p>
+<p>If you want to debug the frontend without caring about the backend, you can fill in the values you want here and the backend will take it into account.</p>
+<p style="color: green;">Urls will be accessible on /api/debug/xxx.</p>
+<p style="color: red;">All urls have to start with "/debug/". Ex: "/debug/aa", "/debug/aa/bb/cc".</p>
 
-<p>On peut mettre ce qu'on veut dans les paramètres tant que c'est correct en JSON : tableaux, dictionnaires, tableaux de dictionnaires, ...</p>
+<p>Any JSON valid data is ok.</p>
 <ul>
 <li>{"/debug/a": ["kjkj", "kjkj"], "/debug/b": ..., }</li>
 <li>{"/debug/a": {"a": [1, 3, 4], "b": {"c": "d", "e": "f"}}, "/debug/b": ..., }</li>
 </ul>
-
 
 <form action="/api/debug" method="post">
     <textarea rows="10" cols="50" name="urls">
@@ -21,6 +21,6 @@
 	<input type="submit">
 </form>
 
-<h1>Valeurs des urls</h1>
+<h1>Url values</h1>
 <p>{{text}}</p>
 </html>

@@ -49,10 +49,17 @@ def doesEmailExist(email):
     return user_pb is not None
 
 
-def IsAdmin():
+def isAdmin():
     """Returns True if the user is logged in as admin or if debug and &admin=1."""
     if app.debug and request.args.get('admin', False):
         return True
     if flogin.current_user.is_anonymous():
         return False
     return flogin.current_user.user_pb.admin
+
+
+def getCurrentUserPb():
+    """Returns the loggedin user's protobug or None if no user is logged in"""
+    if flogin.current_user.is_anonymous():
+        return None
+    return flogin.current_user.user_pb

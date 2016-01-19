@@ -15,19 +15,6 @@ import protobuf_json
 import stripe
 
 
-@app.route('/login', methods=['GET'])
-def page_login():
-    """login page."""
-    return render_template('home.html')
-
-
-@app.route('/logout', methods=['GET'])
-def page_logout():
-    """logout page."""
-    flogin.logout_user()
-    return redirect('/login')
-
-
 @app.route('/signup', methods=['GET'])
 def page_signup():
     """Sign up page."""
@@ -126,7 +113,7 @@ def login():
     return 'ok'
 
 
-@app.route('/api/v1/logout')
+@app.route('/api/v1/logout', methods=['GET'])
 def logout():
     """log out."""
     flogin.logout_user()
