@@ -61,6 +61,7 @@ ngApp.controller('ngController', ['$scope', '$http', function($scope, $http) {
                                     alert('Sign up successful');
                                 })
                                 .error(function(jsonData, status, headers, config) {
+                                    $scope.logged_in_as = $scope.signup.user_info.email;
                                     $scope.isLoading = false;
                                     alert('Error in account creation. Please contact us if you have any problem');
                                 });
