@@ -55,6 +55,14 @@ def ProtoForTable(table):
     return _COLLECTION_TO_PB_CLASS[table]()
 
 
+def ProtoToKVS(pb, collection_name):
+    kvs = protobuf_json.pb2json(pb)
+    if collection_name in (RW_USERS,) and pb.id:
+        kvs['_id'] = pb.id
+        del kvs['id']
+    return kvs
+
+
 def SaveProto(obj, collection_name):
     """Saves the protobuf 'obj' into the mongodb collection collection_name.
     A protobuf is like a dictionary and mongo likes dictionaries.
@@ -63,10 +71,7 @@ def SaveProto(obj, collection_name):
     or eventual indexes, ...).
     SaveProto and ToProto are meant to be reciprocal."""
     assert(obj.__class__ == _COLLECTION_TO_PB_CLASS[collection_name])
-    kvs = protobuf_json.pb2json(obj)
-    if collection_name in (RW_USERS,) and obj.id:
-        kvs['_id'] = obj.id
-        del kvs['id']
+    kvs = ProtoToKVS(obj, collection_name)
     mongo_db[collection_name].save(kvs)
 
 
@@ -85,6 +90,18 @@ def ToProto(cursor, collection_name=None):
         pb.id = cursor['_id']
         return pb
     return protobuf_json.json2pb(cls(), cursor)
+
+
+def SaveProtos(objs, collection_name):
+    """Saves the array of protobuf 'obj' into the mongodb collection collection_name.
+    See notes in SaveProto.
+    SaveProtos and ToProtos are meant to be reciprocal."""
+    all_kvs = []
+    for obj in objs:
+        assert(obj.__class__ == _COLLECTION_TO_PB_CLASS[collection_name])        
+        kvs = ProtoToKVS(obj, collection_name)
+        all_kvs.append(kvs)
+    mongo_db[collection_name].insert(all_kvs)
 
 
 def ToProtos(cursor):

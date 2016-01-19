@@ -23,6 +23,10 @@ ngApp.controller('ngController', ['$scope', '$http', function($scope, $http) {
         $scope.new_product = {name: "", quantity: 0};
     }
 
+    $scope.deleteProduct = function($index) {
+        $scope.products.splice($index, 1);
+    }
+
     $scope.save = function() {
         $scope.sendingData = true;
         $http.post("/api/v1/products/save", $scope.products)

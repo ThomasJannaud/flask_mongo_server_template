@@ -1,8 +1,9 @@
 <!doctype html>
-<html>
+<html ng-app="ngApp">
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf8" />
     <title>Products</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
     <script src="/static/js/utils.js"></script>  
     <script src="/static/js/ng_products.js"></script>
@@ -12,13 +13,13 @@
     <p ng-repeat="product in products">
     name: [{[product.name]}]<br/>
     qte: [{[product.quantity]}]<br/>
-    <a href="" ng-click="deleteProduct($index);">delete</a>
+    <button ng-disabled="sendingData" ng-click="deleteProduct($index);">delete</button>
     </p>
     <h1>Register new product</h1>
     <input type="text" placeholder="name" ng-model="new_product.name"/><br/>
     <input type="text" placeholder="quantity" ng-model="new_product.quantity"/><br/>
-    <a href="" ng-click="addProduct();">add</a>
+    <button ng-disabled="sendingData" ng-click="addProduct();">add</button>
     <h1>Save</h1>
-    <a href="" ng-click="save();">Save</a>
+    <button ng-disabled="sendingData" ng-click="save();">Save</button>
   </body>
 </html>
