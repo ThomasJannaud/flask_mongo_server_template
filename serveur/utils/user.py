@@ -1,5 +1,4 @@
 from flask import request
-from flask import session
 from flask.ext import login as flogin
 from flask.ext.login import LoginManager
 from serveur import app
@@ -37,7 +36,7 @@ class FLUser:
     def is_active(self):
         return True
     def is_anonymous(self):
-            return False
+        return False
     def get_id(self):
         return self.user_pb.id
 

@@ -2,6 +2,7 @@ from flask import abort
 from flask import redirect
 from flask import render_template
 from flask import request
+from flask import session
 from flask.ext import login as flogin
 from flask.ext.login import LoginManager
 from serveur import app
@@ -104,6 +105,7 @@ def login():
         abort(400)
     user = user_util.FLUser(user_pb)
     flogin.login_user(user, remember=input_pb.remember)
+    session.permanent = True
     return 'ok'
 
 

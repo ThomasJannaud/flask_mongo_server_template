@@ -71,7 +71,7 @@ def save_image():
     server_dir = os.path.dirname(os.path.realpath(__file__))
     file_id = data_models.GetUniqueId()
     filename = "ad-%d.%s" % (file_id, image_type)
-    full_filename = "static/%s/%s" % (app.config[Constants.UPLOAD_DIR], filename)
+    full_filename = "static/%s/%s" % (app.config[Constants.KEY_UPLOAD_DIR], filename)
     with open(server_dir + "/" + full_filename, "wb") as f:
         f.write(b64bytes.decode('base64'))
     return utils.FileToImageUrl(filename)

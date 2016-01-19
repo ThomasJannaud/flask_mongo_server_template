@@ -50,7 +50,7 @@ def debug_login():
 
     ?user_id=2
     """
-    if app.config[Constants.MODE] == Constants.PROD:
+    if app.config[Constants.KEY_MODE] == Constants.PROD:
         abort(401)
     table = data_models.GetTable(data_models.RW_USERS)
     user_pb = data_models.ToProto(table.find_one({"_id": int(request.args.get('user_id'))}), data_models.RW_USERS)
@@ -75,7 +75,7 @@ def toTrashbin():
 @app.route('/raz', methods=['GET'])
 def raz():
     """Empties the database and puts back all the fake data."""
-    if app.config[Constants.MODE] == Constants.PROD or (app.config[Constants.MODE] == Constants.BETA and request.args.get("admin", "0") != "1"):
+    if app.config[Constants.KEY_MODE] == Constants.PROD or (app.config[Constants.KEY_MODE] == Constants.BETA and request.args.get("admin", "0") != "1"):
         abort(401)
     data_models.Raz()
     server_dir = os.path.dirname(os.path.realpath(__file__))
@@ -86,7 +86,7 @@ def raz():
             for data in datas:
                 pb = data_models.DictToProto(data_models.ProtoForTable(table), data)
                 data_models.SaveProto(pb, table)
-    upload_dir = "%s/static/%s" % (server_dir, app.config[Constants.UPLOAD_DIR])
+    upload_dir = "%s/static/%s" % (server_dir, app.config[Constants.KEY_UPLOAD_DIR])
     shutil.rmtree(upload_dir, ignore_errors=True)
     os.mkdir(upload_dir)
     return 'ok'

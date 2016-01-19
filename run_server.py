@@ -17,7 +17,7 @@ import flask_cors
 import logging
 import stripe
 import sys
-
+import datetime
 
 if __name__ == '__main__':
     is_debug = ('--debug' in sys.argv)
@@ -27,24 +27,24 @@ if __name__ == '__main__':
     app.secret_key = Constants.FLASK_SECRET_KEY
     app.debug = is_debug
     if is_debug:
-        app.config[Constants.MODE] = Constants.DEBUG
-        app.config[Constants.UPLOAD_DIR] = "upload_debug"
-        app.config[Constants.ALLOW_ANYONE] = False
+        app.config[Constants.KEY_MODE] = Constants.DEBUG
+        app.config[Constants.KEY_UPLOAD_DIR] = "upload_debug"
+        app.config[Constants.KEY_ALLOW_ANYONE] = False
     elif is_beta:
-        app.config[Constants.MODE] = Constants.BETA
-        app.config[Constants.UPLOAD_DIR] = "upload_beta"
-        app.config[Constants.ALLOW_ANYONE] = True
+        app.config[Constants.KEY_MODE] = Constants.BETA
+        app.config[Constants.KEY_UPLOAD_DIR] = "upload_beta"
+        app.config[Constants.KEY_ALLOW_ANYONE] = True
         flask_cors.CORS(app, resources=r'/api/*', allow_headers='Content-Type')
     else:
-        app.config[Constants.MODE] = Constants.PROD
-        app.config[Constants.ALLOW_ANYONE] = False
-        app.config[Constants.UPLOAD_DIR] = "upload_prod"
+        app.config[Constants.KEY_MODE] = Constants.PROD
+        app.config[Constants.KEY_ALLOW_ANYONE] = False
+        app.config[Constants.KEY_UPLOAD_DIR] = "upload_prod"
     if is_prod:
-        stripe.api_key = "sk_live_7WMT9Du1YdjhUlioed2RKv0p"
-        app.config[Constants.STRIPE_PUBLISHABLE_KEY] = "pk_live_bbtSKIKZ1EFSnwIOKmlTtm0n"
+        stripe.api_key = Constants.STRIPE_SECRET_KEY_LIVE
+        app.config[Constants.KEY_STRIPE_PUBLISHABLE_KEY] = Constants.STRIPE_PUBLISHABLE_KEY_LIVE
     else:
-        stripe.api_key = "sk_test_xHVPFMzSuXi6okL23oILEAql"        
-        app.config[Constants.STRIPE_PUBLISHABLE_KEY] = "pk_test_ljhglPykU1D7d4mP9TLT14KW"
+        stripe.api_key = Constants.STRIPE_SECRET_KEY_TEST
+        app.config[Constants.KEY_STRIPE_PUBLISHABLE_KEY] = Constants.STRIPE_PUBLISHABLE_KEY_TEST
     from serveur.utils import jinja_filters
     from serveur.utils import session_mongo
     from serveur.utils import utils

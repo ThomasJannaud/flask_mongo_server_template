@@ -13,8 +13,8 @@ def page_not_found(e):
 
 @app.route('/', methods=['GET'])
 def page_home():
-    """Home page any language."""
+    """Home page."""
     user_pb = user_util.getCurrentUserPb()
     return render_template('home.html',
-      stripe_publishable_key=app.config[Constants.STRIPE_PUBLISHABLE_KEY],
+      stripe_publishable_key=app.config[Constants.KEY_STRIPE_PUBLISHABLE_KEY],
       logged_in_name="" if user_pb is None else user_pb.info.email)
