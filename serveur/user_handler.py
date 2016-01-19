@@ -15,12 +15,6 @@ import protobuf_json
 import stripe
 
 
-@app.route('/signup', methods=['GET'])
-def page_signup():
-    """Sign up page."""
-    return render_template('signup.html', stripe_publishable_key=app.config[Constants.STRIPE_PUBLISHABLE_KEY])
-
-
 @app.route('/api/v1/forgot_password', methods=["GET"])
 def forgot_password():
     """Sends an email.
