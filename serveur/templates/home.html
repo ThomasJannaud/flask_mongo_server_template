@@ -4,22 +4,25 @@
     <meta http-equiv="Content-Type" content="text/html;charset=utf8" />
     <title>Homepage</title>
     <link rel="stylesheet" type="text/css" href="/static/css/theme.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/home.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
     <script src="/static/js/utils.js"></script> 
     <script src="/static/js/ng_home.js"></script>
-    <script src="https://js.stripe.com/v2/"></script>
   </head>
-  <body id="ng-controller" ng-controller="ngController" ng-init="loggedin_name='{{logged_in_name}}';">
-    <h1>Homepage</h1>
-    <p>Our product is excellent. Buy it!</p>
-    <p>Our pages :
-    <a href="/debug">debug</a>, <a href="/api">api</a>, <a href="/products">products</a> and <a href="/raz">raz</a></p>
+  <body ng-controller="ngHomeController" ng-init="init('{{logged_in_name}}')">
+    <h1>local links</h1>
+    <ul>
+      <li><a href="/api">api</a> : list of all apis in this project</li>
+      <li><a href="/debug">debug</a> : can be useful</li>
+      <li><a href="/products">products</a> : a test page to show angular js and saving in mongo</li>
+      <li><a href="/raz">raz</a> : to RAZ the db with data in /fake_data</li>
+    </ul>
 
     <h1>Login</h1>
+
     <p ng-if="logged_in_as !== ''">Logged in as [{[logged_in_as]}].</p>
     <p ng-if="logged_in_as == ''">Not logged in.</p>
+    <p>A valid email/password is f@f.fr, password=f. See /fake_data directory</p>
     <form>
       <input ng-model="login.email" type='text' placeholder="{{ _('email') }}"/><br/>
       <input ng-model="login.password" type='password' placeholder="{{ _('password') }}"/><br/>
@@ -27,35 +30,15 @@
       <button ng-disabled="isLoading" ng-click="tryLogin()">{{ _('Login') }}</button><br/>
     </form>
 
+    <h1>Logout</h1>
+    <button ng-disabled="isLoading" ng-click="logout()">{{ _('Log out') }}</button>
+
     <h1>Signup</h1>
     <form>
       <input ng-model="signup.user_info.email" type='text' placeholder="{{ _('email') }}"/><br/>
       <input ng-model="signup.user_info.password" type='password' placeholder="{{ _('password') }}"/><br/>
-      <input type='text' ng-model="card.number" placeholder="Card number"/><br/>
-      <input type='text' ng-model="card.cvc" placeholder="Card security code (3 or 4 digits)"/><br/>
-      {{ _('Expiration date:')}}
-      <select ng-model="card_month" ng-options="month as month.name for month in monthList"></select>
-      <select ng-model="card.exp_year" ng-options="year for year in yearList"></select><br/>
       <button ng-disabled="isLoading || !signup.user_info.email" ng-click="trySignup();">{{ _('signup') }}</button><br/>
-
       <span class="validation_error" ng-show="signup.user_info.email==''">Email required</span><br/>
-      <span class="validation_error" ng-bind="stripe_error"></span>
     </form>
   </body>
-  <script>
-    Stripe.setPublishableKey("{{stripe_publishable_key}}");
-    $('[data-toggle="popover"]').popover({html: true});
-    $('body').on('click', function (e) {
-        $('[data-toggle="popover"]').each(function () {
-          //the 'is' for buttons that trigger popups
-          //the 'has' for icons within a button that triggers a popup
-          if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-            $(this).popover('hide');
-          }
-        });
-    });
-  </script> 
-
-  <h1>Logout</h1>
-  <button ng-disabled="isLoading" ng-click="logout()">{{ _('Log out') }}</button>
 </html>

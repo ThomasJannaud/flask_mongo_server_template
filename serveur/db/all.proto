@@ -18,7 +18,6 @@ message User {
     optional Info info = 3;
     optional string verification_code = 4;
     optional bool has_verified_email = 5;
-    optional string stripe_customer_id = 6;
     optional int64 timestamp_creation_secs = 7;
     optional uint64 timestamp_last_modification_secs = 8;
 }
@@ -58,5 +57,4 @@ message LoginRequest {
 // Registration page
 message RegistrationRequest {
     optional User.Info user_info = 1;
-    optional string stripe_token = 2;
 }

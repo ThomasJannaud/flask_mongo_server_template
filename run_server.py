@@ -14,7 +14,6 @@ from logging.handlers import RotatingFileHandler
 from serveur import app
 from serveur import Constants
 import logging
-import stripe
 import sys
 import datetime
 
@@ -35,10 +34,8 @@ if __name__ == '__main__':
         app.config[Constants.KEY_MODE] = Constants.PROD
         app.config[Constants.KEY_UPLOAD_DIR] = "upload_prod"
     if is_prod:
-        stripe.api_key = Constants.STRIPE_SECRET_KEY_LIVE
         app.config[Constants.KEY_STRIPE_PUBLISHABLE_KEY] = Constants.STRIPE_PUBLISHABLE_KEY_LIVE
     else:
-        stripe.api_key = Constants.STRIPE_SECRET_KEY_TEST
         app.config[Constants.KEY_STRIPE_PUBLISHABLE_KEY] = Constants.STRIPE_PUBLISHABLE_KEY_TEST
     from serveur.utils import jinja_filters
     from serveur.utils import session_mongo
