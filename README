@@ -19,9 +19,10 @@ Make sure MongoDB is running, then execute
 
 
 ARCHITECTURE:
-We like Flask and the way it is made to be bent to easily fit our needs.
+We like Flask and its flexibility.
 
 We use MongoDB to store data. Because MongoDB is schemaless doesn't mean we have to put some hacks everywhere to access the db. It is good practice to force some schema anyway on the data, that's why we use Google's Protocol Buffers.
+Note: We don't force as much as we would like... Names in the .proto will be used in HTML/Angular, by MapReduce and in queries to MongoDB...
 
 
 ---------------------------
