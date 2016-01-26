@@ -33,10 +33,6 @@ if __name__ == '__main__':
     else:
         app.config[Constants.KEY_MODE] = Constants.PROD
         app.config[Constants.KEY_UPLOAD_DIR] = "upload_prod"
-    if is_prod:
-        app.config[Constants.KEY_STRIPE_PUBLISHABLE_KEY] = Constants.STRIPE_PUBLISHABLE_KEY_LIVE
-    else:
-        app.config[Constants.KEY_STRIPE_PUBLISHABLE_KEY] = Constants.STRIPE_PUBLISHABLE_KEY_TEST
     from serveur.utils import jinja_filters
     from serveur.utils import session_mongo
     from serveur.utils import utils
