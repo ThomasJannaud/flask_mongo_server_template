@@ -23,6 +23,7 @@ import random
 
 RW_USERS = 'users'
 RW_PRODUCTS = 'products'
+RW_SALES = 'sales'
 RW_SESSIONS = 'sessions'
 RW_UNIQUE_IDS = 'unique_ids'
 
@@ -32,6 +33,7 @@ _COLLECTION_TO_PB_CLASS = {
     RW_SESSIONS: None,
     RW_PRODUCTS: all_pbs.Product,
     RW_USERS: all_pbs.User,
+    RW_SALES: all_pbs.Sale,
 }
 
 client = pymongo.MongoClient()

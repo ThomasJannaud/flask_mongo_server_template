@@ -12,12 +12,12 @@
     <h1>All products</h1>
     <p ng-repeat="product in products">
     name: [{[product.name]}]<br/>
-    qte: [{[product.quantity]}]<br/>
+    qte: [{[product.price_usd]}]<br/>
     <button ng-disabled="sendingData" ng-click="deleteProduct($index);">delete</button>
     </p>
     <h1>Register new product</h1>
     <input type="text" placeholder="name" ng-model="new_product.name"/><br/>
-    <input type="text" placeholder="quantity" ng-model="new_product.quantity"/><br/>
+    <input type="text" placeholder="quantity" ng-model="new_product.price_usd"/><br/>
     <button ng-disabled="sendingData" ng-click="addProduct();">add</button>
     <h1>Save</h1>
     <button ng-disabled="sendingData" ng-click="save();">Save</button>

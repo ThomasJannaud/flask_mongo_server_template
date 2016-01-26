@@ -80,7 +80,7 @@ def raz():
     data_models.Raz()
     server_dir = os.path.dirname(os.path.realpath(__file__))
     # The filenames in the directory must match the collection names in data_models
-    for table in (data_models.RW_USERS, data_models.RW_PRODUCTS, ):
+    for table in (data_models.RW_USERS, data_models.RW_PRODUCTS, data_models.RW_SALES):
         with open('%s/../fake_data/%s.json' % (server_dir, table)) as f:
             datas = json.loads(f.read())
             for data in datas:

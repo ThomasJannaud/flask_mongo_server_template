@@ -13,7 +13,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='all.proto',
   package='',
-  serialized_pb='\n\tall.proto\"\xbf\x02\n\x04User\x12\n\n\x02id\x18\x01 \x01(\x03\x12\r\n\x05\x61\x64min\x18\x02 \x01(\x08\x12\x18\n\x04info\x18\x03 \x01(\x0b\x32\n.User.Info\x12\x19\n\x11verification_code\x18\x04 \x01(\t\x12\x1a\n\x12has_verified_email\x18\x05 \x01(\x08\x12\x1a\n\x12stripe_customer_id\x18\x06 \x01(\t\x12\x1f\n\x17timestamp_creation_secs\x18\x07 \x01(\x03\x12(\n timestamp_last_modification_secs\x18\x08 \x01(\x04\x1a\x64\n\x04Info\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x12\n\nfirst_name\x18\x03 \x01(\t\x12\x11\n\tlast_name\x18\x04 \x01(\t\x12\x14\n\x0cphone_number\x18\x05 \x01(\t\"@\n\x07Product\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x08quantity\x18\x02 \x01(\x05\x12\x15\n\ruser_owner_id\x18\x03 \x01(\x03\"A\n\x0cLoginRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x10\n\x08remember\x18\x03 \x01(\x08\"J\n\x13RegistrationRequest\x12\x1d\n\tuser_info\x18\x01 \x01(\x0b\x32\n.User.Info\x12\x14\n\x0cstripe_token\x18\x02 \x01(\t')
+  serialized_pb='\n\tall.proto\"\xbf\x02\n\x04User\x12\n\n\x02id\x18\x01 \x01(\x03\x12\r\n\x05\x61\x64min\x18\x02 \x01(\x08\x12\x18\n\x04info\x18\x03 \x01(\x0b\x32\n.User.Info\x12\x19\n\x11verification_code\x18\x04 \x01(\t\x12\x1a\n\x12has_verified_email\x18\x05 \x01(\x08\x12\x1a\n\x12stripe_customer_id\x18\x06 \x01(\t\x12\x1f\n\x17timestamp_creation_secs\x18\x07 \x01(\x03\x12(\n timestamp_last_modification_secs\x18\x08 \x01(\x04\x1a\x64\n\x04Info\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x12\n\nfirst_name\x18\x03 \x01(\t\x12\x11\n\tlast_name\x18\x04 \x01(\t\x12\x14\n\x0cphone_number\x18\x05 \x01(\t\">\n\x07Product\x12\x12\n\nproduct_id\x18\x01 \x01(\x03\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x11\n\tprice_usd\x18\x03 \x01(\x02\"\x84\x01\n\x04Sale\x12\x0f\n\x07user_id\x18\x01 \x01(\x03\x12\x11\n\ttimestamp\x18\x02 \x01(\x03\x12#\n\x08products\x18\x03 \x03(\x0b\x32\x11.Sale.ProductSale\x1a\x33\n\x0bProductSale\x12\x12\n\nproduct_id\x18\x01 \x01(\x03\x12\x10\n\x08quantity\x18\x02 \x01(\x05\"A\n\x0cLoginRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x10\n\x08remember\x18\x03 \x01(\x08\"J\n\x13RegistrationRequest\x12\x1d\n\tuser_info\x18\x01 \x01(\x0b\x32\n.User.Info\x12\x14\n\x0cstripe_token\x18\x02 \x01(\t')
 
 
 
@@ -158,22 +158,22 @@ _PRODUCT = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='name', full_name='Product.name', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='quantity', full_name='Product.quantity', index=1,
-      number=2, type=5, cpp_type=1, label=1,
+      name='product_id', full_name='Product.product_id', index=0,
+      number=1, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='user_owner_id', full_name='Product.user_owner_id', index=2,
-      number=3, type=3, cpp_type=2, label=1,
+      name='name', full_name='Product.name', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=unicode("", "utf-8"),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='price_usd', full_name='Product.price_usd', index=2,
+      number=3, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -188,7 +188,83 @@ _PRODUCT = _descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=335,
-  serialized_end=399,
+  serialized_end=397,
+)
+
+
+_SALE_PRODUCTSALE = _descriptor.Descriptor(
+  name='ProductSale',
+  full_name='Sale.ProductSale',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='product_id', full_name='Sale.ProductSale.product_id', index=0,
+      number=1, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='quantity', full_name='Sale.ProductSale.quantity', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=481,
+  serialized_end=532,
+)
+
+_SALE = _descriptor.Descriptor(
+  name='Sale',
+  full_name='Sale',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='user_id', full_name='Sale.user_id', index=0,
+      number=1, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='timestamp', full_name='Sale.timestamp', index=1,
+      number=2, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='products', full_name='Sale.products', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[_SALE_PRODUCTSALE, ],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  serialized_start=400,
+  serialized_end=532,
 )
 
 
@@ -229,8 +305,8 @@ _LOGINREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=401,
-  serialized_end=466,
+  serialized_start=534,
+  serialized_end=599,
 )
 
 
@@ -264,15 +340,18 @@ _REGISTRATIONREQUEST = _descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=468,
-  serialized_end=542,
+  serialized_start=601,
+  serialized_end=675,
 )
 
 _USER_INFO.containing_type = _USER;
 _USER.fields_by_name['info'].message_type = _USER_INFO
+_SALE_PRODUCTSALE.containing_type = _SALE;
+_SALE.fields_by_name['products'].message_type = _SALE_PRODUCTSALE
 _REGISTRATIONREQUEST.fields_by_name['user_info'].message_type = _USER_INFO
 DESCRIPTOR.message_types_by_name['User'] = _USER
 DESCRIPTOR.message_types_by_name['Product'] = _PRODUCT
+DESCRIPTOR.message_types_by_name['Sale'] = _SALE
 DESCRIPTOR.message_types_by_name['LoginRequest'] = _LOGINREQUEST
 DESCRIPTOR.message_types_by_name['RegistrationRequest'] = _REGISTRATIONREQUEST
 
@@ -293,6 +372,18 @@ class Product(_message.Message):
   DESCRIPTOR = _PRODUCT
 
   # @@protoc_insertion_point(class_scope:Product)
+
+class Sale(_message.Message):
+  __metaclass__ = _reflection.GeneratedProtocolMessageType
+
+  class ProductSale(_message.Message):
+    __metaclass__ = _reflection.GeneratedProtocolMessageType
+    DESCRIPTOR = _SALE_PRODUCTSALE
+
+    # @@protoc_insertion_point(class_scope:Sale.ProductSale)
+  DESCRIPTOR = _SALE
+
+  # @@protoc_insertion_point(class_scope:Sale)
 
 class LoginRequest(_message.Message):
   __metaclass__ = _reflection.GeneratedProtocolMessageType

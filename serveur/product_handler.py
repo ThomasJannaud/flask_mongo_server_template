@@ -34,6 +34,7 @@ def save_product():
     """
     inp = request.get_json()
     pbs = data_models.ArrayToProto(all_pbs.Product, inp)
+    # WARNING: this is really to showcase the app, don't do this of course!
     data_models.GetTable(data_models.RW_PRODUCTS).drop()
     data_models.SaveProtos(pbs, data_models.RW_PRODUCTS)
     return 'ok'

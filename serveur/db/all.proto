@@ -25,11 +25,21 @@ message User {
 
 
 message Product {
-    optional string name = 1;
-    optional int32 quantity = 2;
-    optional int64 user_owner_id = 3;
+    optional int64 product_id = 1;
+    optional string name = 2;
+    optional float price_usd = 3;
 }
 
+
+message Sale {
+    optional int64 user_id = 1;
+    optional int64 timestamp = 2;
+    message ProductSale {
+        optional int64 product_id = 1;
+        optional int32 quantity = 2;
+    }
+    repeated ProductSale products = 3;
+}
 
 // -------------------------
 //          Website

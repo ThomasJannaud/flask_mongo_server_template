@@ -8,7 +8,7 @@ ngApp.config(function($interpolateProvider) {
 ngApp.controller('ngController', ['$scope', '$http', function($scope, $http) {
     $scope.products = [];  // list of Product
     $scope.sendingData = false;
-    $scope.new_product = {name: "", quantity: 0};
+    $scope.new_product = {name: "", price_usd: 0};
 
     $http.get("/api/v1/products/all")
         .success(function(jsonData, status, headers, config) {
@@ -20,7 +20,7 @@ ngApp.controller('ngController', ['$scope', '$http', function($scope, $http) {
 
     $scope.addProduct = function() {
         $scope.products.push($scope.new_product);
-        $scope.new_product = {name: "", quantity: 0};
+        $scope.new_product = {name: "", price_usd: 0};
     }
 
     $scope.deleteProduct = function($index) {

@@ -1,10 +1,12 @@
 [
     {
+        "product_id": 14,
         "name": "game boy",
-        "quantity": 3
+        "price_usd": 30.3
     },
     {
+        "product_id": 17,
         "name": "nintendo",
-        "quantity": 7
+        "price_usd": 121.4
     }
 ]
