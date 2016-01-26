@@ -34,7 +34,7 @@ class MongoSessionInterface(SessionInterface):
         if self.get_expiration_time(app, session):
             expiration = self.get_expiration_time(app, session)
         else:
-            expiration = datetime.utcnow() + timedelta(seconds=15)
+            expiration = datetime.utcnow() + timedelta(days=15)
         data_models.GetTable(data_models.RW_SESSIONS).update({'sid': session.sid},
                           {'sid': session.sid,
                            'data': session,
