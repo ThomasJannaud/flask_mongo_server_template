@@ -1,12 +1,15 @@
-This is a very bare website skeleton built on top of Flask.
+This is a website skeleton built on top of Flask. The main reason for publishing it is that good examples of use of Flask/MongoDB/Google's Protocol Buffers on the internet were inexistent.
 
-It has support for signup/login, mapreduce, Google's protobufer, localization, etc
-Everything you need for a small website with a clean architecture with all you need but not more.
+This features a clean architecture design and support for signup/login, MapReduce, Google's protobufer, localization, etc
+Everything you need to start a small website from scratch with extra pure code.
+
+Some code is ready to deploy it to a fixed ip serveur.
+
 
 REQUIREMENTS:
 - Have MondoDB installed and running
 - Have Google's Protobuf library installed
-- run serveur/db/generate_protos.sh to compile the .proto file
+- execute serveur/db/generate_protos.sh to compile the .proto file
 
 
 RUNNING:
@@ -14,9 +17,50 @@ Make sure MongoDB is running, then execute
 
     python run_server --debug
 
-You can play around on the /install folder to install on a fixed IP server.
+
+ARCHITECTURE:
+We like Flask and the way it is made to be bent to easily fit our needs.
+
+We use MongoDB to store data. Because MongoDB is schemaless doesn't mean we have to put some hacks everywhere to access the db. It is good practice to force some schema anyway on the data, that's why we use Google's Protocol Buffers.
 
 
-Visit /api to see the API of the website. It is generated on the fly based on comments from various handlers.
+---------------------------
+Interesting Files / Directories
+
+/run_server.py: the "main". This is where lots of options and configurations take place.
+
+/serveur/__init__.py: global constants
+
+/serveur/xxx_handler.py: handler for xxx. Handlers are the gateways for http GET/POST/... requests.
+
+/serveur/debug_handler.py : some tools that I have used to help debugging during development.
+
+/serveur/user_handler.py and /serveur/utils/user.py: Check here how login is handled and how from a session cookie the session is retrieved.
+
+/serveur/templates: html files
+/serveur/static: javascript, images, css, ...
+
+/serveur/db/data_models.py: some wrapper around the DB. Takes care of converting from protobuf to json and vice versa. Read and write requests usually go through this layer.
+
+Why not rely on something existing, like Django's rest api ? Because no need to have a black box when it takes only two lines of code to issue the requests themselves. We are in full control of what's going on. This is the whole philosophy behind this skeleton.
+
+/ install: Some scripts to install/deploy on a fixed IP server.
+
+/i18n: translations go here (use POEdit)
+
+/fake_data: if you want to start from a fresh database, visit /raz and MongoDB will be cleaned and load the data in this directory.
+
+/pipelines: examples of running a MapReduce
+
+
+----------------
+Interesting urls
+
+/ : home page
+/api : to see the API of the website. It is generated on the fly based on comments from various handlers.
+/products: a sample page to show a catalogue of products. User can edit and save it.
+/raz
+/debug
+
 
 Have fun and don't hesitate to tweak around and send me some pull requests!

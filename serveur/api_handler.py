@@ -1,4 +1,5 @@
-"""This intends to replicate what swaggers does : it lists all apis in the project."""
+"""This intends to replicate what swaggers does:
+it lists all apis and url routes in the project."""
 
 from flask import abort
 from flask import render_template
