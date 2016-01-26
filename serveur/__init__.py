@@ -8,7 +8,6 @@ class Constants:
     APP_NAME = 'REPLACEME_NAME'
     KEY_MODE = 'mode'  # app.config[MODE] = one of the constants PROD, BETA, DEBUG
     PROD, BETA, DEBUG = range(3)
-    KEY_ALLOW_ANYONE = 'allow_anyone'  # to let others work on beta version (html+js+css only) without any login
     KEY_UPLOAD_DIR = 'upload_dir'
     DB_NAME = 'REPLACEME_DBNAME'
     KEY_STRIPE_PUBLISHABLE_KEY = "stripe publishable key"

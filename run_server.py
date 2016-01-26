@@ -13,7 +13,6 @@ from logging import Formatter
 from logging.handlers import RotatingFileHandler
 from serveur import app
 from serveur import Constants
-import flask_cors
 import logging
 import stripe
 import sys
@@ -29,15 +28,11 @@ if __name__ == '__main__':
     if is_debug:
         app.config[Constants.KEY_MODE] = Constants.DEBUG
         app.config[Constants.KEY_UPLOAD_DIR] = "upload_debug"
-        app.config[Constants.KEY_ALLOW_ANYONE] = False
     elif is_beta:
         app.config[Constants.KEY_MODE] = Constants.BETA
         app.config[Constants.KEY_UPLOAD_DIR] = "upload_beta"
-        app.config[Constants.KEY_ALLOW_ANYONE] = True
-        flask_cors.CORS(app, resources=r'/api/*', allow_headers='Content-Type')
     else:
         app.config[Constants.KEY_MODE] = Constants.PROD
-        app.config[Constants.KEY_ALLOW_ANYONE] = False
         app.config[Constants.KEY_UPLOAD_DIR] = "upload_prod"
     if is_prod:
         stripe.api_key = Constants.STRIPE_SECRET_KEY_LIVE
@@ -68,7 +63,8 @@ if __name__ == '__main__':
     from serveur import utils_handler
     # Run !
     if is_debug:
-        # sessions are stored in the db instead of internal variables -> easier for debugging.
+        # sessions are stored in the db instead of internal variables
+        # This makes it easier for debugging.
         app.session_interface = session_mongo.MongoSessionInterface()
         app.run()
     else:
