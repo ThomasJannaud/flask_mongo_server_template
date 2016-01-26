@@ -1,13 +1,13 @@
 This is a website skeleton built on top of Flask. The main reason for publishing it is that good examples of use of Flask/MongoDB/Google's Protocol Buffers on the internet were inexistent.
 
-This features a clean architecture design and support for signup/login, MapReduce, Google's protobufer, localization, etc
+This features a clean architecture design and support for signup/login, MapReduce, Google's protobufer, localization, and file upload management.
 Everything you need to start a small website from scratch with extra pure code.
 
 Some code is ready to deploy it to a fixed ip serveur.
 
 
 REQUIREMENTS:
-- Have MondoDB installed and running
+- Have MongoDB installed and running
 - Have Google's Protobuf library installed
 - execute serveur/db/generate_protos.sh to compile the .proto file
 
