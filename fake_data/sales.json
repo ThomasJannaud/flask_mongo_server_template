@@ -1,0 +1,26 @@
+[
+    {
+        "user_id": 1,
+        "timestamp": 34082034,
+        "products": [
+            {
+                "product_id": 14,
+                "quantity": 2
+            },
+            {
+                "product_id": 17,
+                "quantity": 3
+            }
+        ]
+    },
+    {
+        "user_id": 1,
+        "timestamp": 340820355,
+        "products": [
+            {
+                "product_id": 17,
+                "quantity": 1
+            }
+        ]
+    }
+]
